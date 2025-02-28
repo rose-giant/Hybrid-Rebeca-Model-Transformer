@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.rebecalang.modeltransformer.RebecaToRILInheritanceTest" time="1.501" tests="10" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="19"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1256"/>
+    <property name="java.class.path" value="C:\Users\RayanTech\.m2\repository\org\apache\maven\surefire\surefire-booter\3.2.2\surefire-booter-3.2.2.jar;C:\Users\RayanTech\.m2\repository\org\apache\maven\surefire\surefire-api\3.2.2\surefire-api-3.2.2.jar;C:\Users\RayanTech\.m2\repository\org\apache\maven\surefire\surefire-logger-api\3.2.2\surefire-logger-api-3.2.2.jar;C:\Users\RayanTech\.m2\repository\org\apache\maven\surefire\surefire-shared-utils\3.2.2\surefire-shared-utils-3.2.2.jar;C:\Users\RayanTech\.m2\repository\org\apache\maven\surefire\surefire-extensions-spi\3.2.2\surefire-extensions-spi-3.2.2.jar;C:\Users\RayanTech\Desktop\Razi&apos;s project\org.rebecalang.modeltransformer\target\test-classes;C:\Users\RayanTech\Desktop\Razi&apos;s project\org.rebecalang.modeltransformer\target\classes;C:\Users\RayanTech\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.2\junit-jupiter-api-5.7.2.jar;C:\Users\RayanTech\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\RayanTech\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\RayanTech\.m2\repository\org\junit\platform\junit-platform-commons\1.7.2\junit-platform-commons-1.7.2.jar;C:\Users\RayanTech\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.7.2\junit-jupiter-engine-5.7.2.jar;C:\Users\RayanTech\.m2\repository\org\junit\platform\junit-platform-engine\1.7.2\junit-platform-engine-1.7.2.jar;C:\Users\RayanTech\.m2\repository\commons-cli\commons-cli\1.4\commons-cli-1.4.jar;C:\Users\RayanTech\.m2\repository\org\rebecalang\compiler\2.25\compiler-2.25.jar;C:\Users\RayanTech\.m2\repository\com\sun\xml\bind\jaxb-core\2.3.0.1\jaxb-core-2.3.0.1.jar;C:\Users\RayanTech\.m2\repository\javax\xml\bind\jaxb-api\2.4.0-b180830.0359\jaxb-api-2.4.0-b180830.0359.jar;C:\Users\RayanTech\.m2\repository\javax\activation\javax.activation-api\1.2.0\javax.activation-api-1.2.0.jar;C:\Users\RayanTech\.m2\repository\com\sun\xml\bind\jaxb-impl\2.3.1\jaxb-impl-2.3.1.jar;C:\Users\RayanTech\.m2\repository\org\javassist\javassist\3.25.0-GA\javassist-3.25.0-GA.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-expression\6.1.3\spring-expression-6.1.3.jar;C:\Users\RayanTech\.m2\repository\org\antlr\antlr4\4.8-1\antlr4-4.8-1.jar;C:\Users\RayanTech\.m2\repository\org\antlr\antlr-runtime\3.5.2\antlr-runtime-3.5.2.jar;C:\Users\RayanTech\.m2\repository\org\antlr\ST4\4.3\ST4-4.3.jar;C:\Users\RayanTech\.m2\repository\org\abego\treelayout\org.abego.treelayout.core\1.0.3\org.abego.treelayout.core-1.0.3.jar;C:\Users\RayanTech\.m2\repository\org\glassfish\javax.json\1.0.4\javax.json-1.0.4.jar;C:\Users\RayanTech\.m2\repository\org\antlr\antlr4-runtime\4.8-1\antlr4-runtime-4.8-1.jar;C:\Users\RayanTech\.m2\repository\com\sun\xml\bind\jaxb-xjc\4.0.3\jaxb-xjc-4.0.3.jar;C:\Users\RayanTech\.m2\repository\javax\activation\activation\1.1.1\activation-1.1.1.jar;C:\Users\RayanTech\.m2\repository\org\glassfish\jaxb\jaxb-runtime\4.0.3\jaxb-runtime-4.0.3.jar;C:\Users\RayanTech\.m2\repository\org\glassfish\jaxb\jaxb-core\4.0.3\jaxb-core-4.0.3.jar;C:\Users\RayanTech\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.0\jakarta.xml.bind-api-4.0.0.jar;C:\Users\RayanTech\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.2\jakarta.activation-api-2.1.2.jar;C:\Users\RayanTech\.m2\repository\org\eclipse\angus\angus-activation\2.0.1\angus-activation-2.0.1.jar;C:\Users\RayanTech\.m2\repository\org\glassfish\jaxb\txw2\4.0.3\txw2-4.0.3.jar;C:\Users\RayanTech\.m2\repository\com\sun\istack\istack-commons-runtime\4.1.2\istack-commons-runtime-4.1.2.jar;C:\Users\RayanTech\.m2\repository\org\graalvm\js\js\21.1.0\js-21.1.0.jar;C:\Users\RayanTech\.m2\repository\org\graalvm\regex\regex\21.1.0\regex-21.1.0.jar;C:\Users\RayanTech\.m2\repository\org\graalvm\truffle\truffle-api\21.1.0\truffle-api-21.1.0.jar;C:\Users\RayanTech\.m2\repository\org\graalvm\sdk\graal-sdk\21.1.0\graal-sdk-21.1.0.jar;C:\Users\RayanTech\.m2\repository\com\ibm\icu\icu4j\69.1\icu4j-69.1.jar;C:\Users\RayanTech\.m2\repository\com\squareup\javapoet\1.10.0\javapoet-1.10.0.jar;C:\Users\RayanTech\.m2\repository\com\typesafe\akka\akka-actor_2.12\2.5.16\akka-actor_2.12-2.5.16.jar;C:\Users\RayanTech\.m2\repository\org\scala-lang\scala-library\2.12.6\scala-library-2.12.6.jar;C:\Users\RayanTech\.m2\repository\com\typesafe\config\1.3.3\config-1.3.3.jar;C:\Users\RayanTech\.m2\repository\org\scala-lang\modules\scala-java8-compat_2.12\0.8.0\scala-java8-compat_2.12-0.8.0.jar;C:\Users\RayanTech\.m2\repository\org\apache\velocity\velocity\1.7\velocity-1.7.jar;C:\Users\RayanTech\.m2\repository\commons-collections\commons-collections\3.2.1\commons-collections-3.2.1.jar;C:\Users\RayanTech\.m2\repository\commons-lang\commons-lang\2.4\commons-lang-2.4.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-core\6.0.16\spring-core-6.0.16.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-jcl\6.0.16\spring-jcl-6.0.16.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-context\6.0.16\spring-context-6.0.16.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-aop\6.0.16\spring-aop-6.0.16.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-beans\6.0.16\spring-beans-6.0.16.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-test\6.0.16\spring-test-6.0.16.jar;C:\Users\RayanTech\.m2\repository\org\apache\maven\surefire\surefire-junit-platform\3.2.2\surefire-junit-platform-3.2.2.jar;C:\Users\RayanTech\.m2\repository\org\apache\maven\surefire\common-java5\3.2.2\common-java5-3.2.2.jar;C:\Users\RayanTech\.m2\repository\org\junit\platform\junit-platform-launcher\1.7.2\junit-platform-launcher-1.7.2.jar"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Asia/Tehran"/>
+    <property name="user.country.format" value="IR"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="19"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="D:\Program Files\Java\jdk-19\bin"/>
+    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter C:\Users\RayanTech\AppData\Local\Temp\surefire13091333907164696363 ????-??-??T??-??-??_???-jvmRun1 surefire-20250216111937596_1tmp surefire_0-20250216111937596_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\RayanTech\Desktop\Razi&apos;s project\org.rebecalang.modeltransformer\target\test-classes;C:\Users\RayanTech\Desktop\Razi&apos;s project\org.rebecalang.modeltransformer\target\classes;C:\Users\RayanTech\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.2\junit-jupiter-api-5.7.2.jar;C:\Users\RayanTech\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\RayanTech\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\RayanTech\.m2\repository\org\junit\platform\junit-platform-commons\1.7.2\junit-platform-commons-1.7.2.jar;C:\Users\RayanTech\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.7.2\junit-jupiter-engine-5.7.2.jar;C:\Users\RayanTech\.m2\repository\org\junit\platform\junit-platform-engine\1.7.2\junit-platform-engine-1.7.2.jar;C:\Users\RayanTech\.m2\repository\commons-cli\commons-cli\1.4\commons-cli-1.4.jar;C:\Users\RayanTech\.m2\repository\org\rebecalang\compiler\2.25\compiler-2.25.jar;C:\Users\RayanTech\.m2\repository\com\sun\xml\bind\jaxb-core\2.3.0.1\jaxb-core-2.3.0.1.jar;C:\Users\RayanTech\.m2\repository\javax\xml\bind\jaxb-api\2.4.0-b180830.0359\jaxb-api-2.4.0-b180830.0359.jar;C:\Users\RayanTech\.m2\repository\javax\activation\javax.activation-api\1.2.0\javax.activation-api-1.2.0.jar;C:\Users\RayanTech\.m2\repository\com\sun\xml\bind\jaxb-impl\2.3.1\jaxb-impl-2.3.1.jar;C:\Users\RayanTech\.m2\repository\org\javassist\javassist\3.25.0-GA\javassist-3.25.0-GA.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-expression\6.1.3\spring-expression-6.1.3.jar;C:\Users\RayanTech\.m2\repository\org\antlr\antlr4\4.8-1\antlr4-4.8-1.jar;C:\Users\RayanTech\.m2\repository\org\antlr\antlr-runtime\3.5.2\antlr-runtime-3.5.2.jar;C:\Users\RayanTech\.m2\repository\org\antlr\ST4\4.3\ST4-4.3.jar;C:\Users\RayanTech\.m2\repository\org\abego\treelayout\org.abego.treelayout.core\1.0.3\org.abego.treelayout.core-1.0.3.jar;C:\Users\RayanTech\.m2\repository\org\glassfish\javax.json\1.0.4\javax.json-1.0.4.jar;C:\Users\RayanTech\.m2\repository\org\antlr\antlr4-runtime\4.8-1\antlr4-runtime-4.8-1.jar;C:\Users\RayanTech\.m2\repository\com\sun\xml\bind\jaxb-xjc\4.0.3\jaxb-xjc-4.0.3.jar;C:\Users\RayanTech\.m2\repository\javax\activation\activation\1.1.1\activation-1.1.1.jar;C:\Users\RayanTech\.m2\repository\org\glassfish\jaxb\jaxb-runtime\4.0.3\jaxb-runtime-4.0.3.jar;C:\Users\RayanTech\.m2\repository\org\glassfish\jaxb\jaxb-core\4.0.3\jaxb-core-4.0.3.jar;C:\Users\RayanTech\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.0\jakarta.xml.bind-api-4.0.0.jar;C:\Users\RayanTech\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.2\jakarta.activation-api-2.1.2.jar;C:\Users\RayanTech\.m2\repository\org\eclipse\angus\angus-activation\2.0.1\angus-activation-2.0.1.jar;C:\Users\RayanTech\.m2\repository\org\glassfish\jaxb\txw2\4.0.3\txw2-4.0.3.jar;C:\Users\RayanTech\.m2\repository\com\sun\istack\istack-commons-runtime\4.1.2\istack-commons-runtime-4.1.2.jar;C:\Users\RayanTech\.m2\repository\org\graalvm\js\js\21.1.0\js-21.1.0.jar;C:\Users\RayanTech\.m2\repository\org\graalvm\regex\regex\21.1.0\regex-21.1.0.jar;C:\Users\RayanTech\.m2\repository\org\graalvm\truffle\truffle-api\21.1.0\truffle-api-21.1.0.jar;C:\Users\RayanTech\.m2\repository\org\graalvm\sdk\graal-sdk\21.1.0\graal-sdk-21.1.0.jar;C:\Users\RayanTech\.m2\repository\com\ibm\icu\icu4j\69.1\icu4j-69.1.jar;C:\Users\RayanTech\.m2\repository\com\squareup\javapoet\1.10.0\javapoet-1.10.0.jar;C:\Users\RayanTech\.m2\repository\com\typesafe\akka\akka-actor_2.12\2.5.16\akka-actor_2.12-2.5.16.jar;C:\Users\RayanTech\.m2\repository\org\scala-lang\scala-library\2.12.6\scala-library-2.12.6.jar;C:\Users\RayanTech\.m2\repository\com\typesafe\config\1.3.3\config-1.3.3.jar;C:\Users\RayanTech\.m2\repository\org\scala-lang\modules\scala-java8-compat_2.12\0.8.0\scala-java8-compat_2.12-0.8.0.jar;C:\Users\RayanTech\.m2\repository\org\apache\velocity\velocity\1.7\velocity-1.7.jar;C:\Users\RayanTech\.m2\repository\commons-collections\commons-collections\3.2.1\commons-collections-3.2.1.jar;C:\Users\RayanTech\.m2\repository\commons-lang\commons-lang\2.4\commons-lang-2.4.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-core\6.0.16\spring-core-6.0.16.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-jcl\6.0.16\spring-jcl-6.0.16.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-context\6.0.16\spring-context-6.0.16.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-aop\6.0.16\spring-aop-6.0.16.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-beans\6.0.16\spring-beans-6.0.16.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-test\6.0.16\spring-test-6.0.16.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\RayanTech"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2022-09-20"/>
+    <property name="java.home" value="D:\Program Files\Java\jdk-19"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\RayanTech\Desktop\Razi&apos;s project\org.rebecalang.modeltransformer"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="19+36-2238"/>
+    <property name="user.name" value="RayanTech"/>
+    <property name="stdout.encoding" value="Cp1256"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\RayanTech\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\RAYANT~1\AppData\Local\Temp\"/>
+    <property name="idea.version" value="2024.1.2"/>
+    <property name="java.version" value="19"/>
+    <property name="user.dir" value="C:\Users\RayanTech\Desktop\Razi&apos;s project\org.rebecalang.modeltransformer"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.language.format" value="fa"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1256"/>
+    <property name="java.library.path" value="D:\Program Files\Java\jdk-19\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Java\jdk-17\bin;C:\Program Files\MATLAB\R2024a\runtime\win64;C:\Program Files\MATLAB\R2024a\bin;C:\MinGW\bin;C:\Users\RayanTech\MinGW\bin;C:\Users\RayanTech\Programs\Python\Python312\Scripts\;C:\Users\RayanTech\Programs\Python\Python312\;C:\Users\RayanTech\AppData\Local\Microsoft\WindowsApps;C:\Users\RayanTech\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2024.1.2\bin;;C:\Users\RayanTech\AppData\Roaming\npm;C:\altera\13.0sp1\modelsim_ase\win32aloem;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1256"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="19+36-2238"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="63.0"/>
+  </properties>
+  <testcase name="generateKnownrebecsSequenceResult" classname="org.rebecalang.modeltransformer.RebecaToRILInheritanceTest" time="0.179">
+    <system-out><![CDATA[B.testBMsg
+0:PUSH
+1:POP 1 false
+2:endMsgsrv
+...............................................
+A.A
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+X.X
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+main
+0:PUSH
+1:new X( ):()
+2:new Y( ):()
+3:new Y( ):()
+4:new Z( ):()
+5:new A( known_x->x, ):()
+6:new B( known_y1->x, known_y2->y1, ):()
+7:new C( known_z->x, ):()
+8:POP 1 false
+...............................................
+Y.Y
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+B.B
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+C.C
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+Z.Z
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+C.getInt
+0:PUSH
+1:$RETURN_VALUE$ = 2
+2:POP 1 false
+3:endMethod
+...............................................
+C:\Users\RayanTech\Desktop\Razi's project\org.rebecalang.modeltransformer\src\test\resources\org\rebecalang\modeltransformer\testcase\inheritance\known_rebecs_sequence.rebeca
+]]></system-out>
+  </testcase>
+  <testcase name="useParentsKnownActorsInChild" classname="org.rebecalang.modeltransformer.RebecaToRILInheritanceTest" time="0.02">
+    <system-out><![CDATA[main
+0:PUSH
+1:new C( ):()
+2:new A( known_c->c, ):()
+3:new B( known_a->c, ):()
+4:POP 1 false
+...............................................
+B.B
+0:PUSH
+1:self.B.testBMsg( )
+2:POP 1 false
+3:endMethod
+...............................................
+C.testCMsg
+0:PUSH
+1:POP 1 false
+2:endMsgsrv
+...............................................
+B.testBMsg
+0:PUSH
+1:known_c.C.testCMsg( )
+2:POP 1 false
+3:endMsgsrv
+...............................................
+A.A
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+C.C
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+C:\Users\RayanTech\Desktop\Razi's project\org.rebecalang.modeltransformer\src\test\resources\org\rebecalang\modeltransformer\testcase\inheritance\use_parents_known_actors_in_child.rebeca
+]]></system-out>
+  </testcase>
+  <testcase name="useParentsMsgsrvInChild" classname="org.rebecalang.modeltransformer.RebecaToRILInheritanceTest" time="0.016">
+    <system-out><![CDATA[main
+0:PUSH
+1:new C( ):()
+2:new A( known_c->c, ):()
+3:new B( known_a->c, ):()
+4:POP 1 false
+...............................................
+B.B
+0:PUSH
+1:self.B.testBMsg( )
+2:POP 1 false
+3:endMethod
+...............................................
+C.testCMsg
+0:PUSH
+1:POP 1 false
+2:endMsgsrv
+...............................................
+B.testBMsg
+0:PUSH
+1:known_c.C.testCMsg( )
+2:POP 1 false
+3:endMsgsrv
+...............................................
+A.A
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+C.C
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+C:\Users\RayanTech\Desktop\Razi's project\org.rebecalang.modeltransformer\src\test\resources\org\rebecalang\modeltransformer\testcase\inheritance\use_parents_msgsrv_in_child.rebeca
+]]></system-out>
+  </testcase>
+  <testcase name="generateSelfAndNormalCallsResult" classname="org.rebecalang.modeltransformer.RebecaToRILInheritanceTest" time="0.042">
+    <system-out><![CDATA[C.methodc1
+0:PUSH
+1:$RETURN_VALUE$ = 2
+2:POP 1 false
+3:endMethod
+...............................................
+A.A
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+X.X
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+A.msga2
+0:PUSH
+1:POP 1 false
+2:endMsgsrv
+...............................................
+main
+0:PUSH
+1:new X( ):()
+2:new Y( ):()
+3:new Y( ):()
+4:new Z( ):()
+5:new A( known_x->x, ):()
+6:new B( known_y1->x, known_y2->y1, ):()
+7:new C( known_z->x, ):()
+8:POP 1 false
+...............................................
+A.msga1
+0:PUSH
+1:POP 1 false
+2:endMsgsrv
+...............................................
+B.msgb1
+0:PUSH
+1:POP 1 false
+2:endMsgsrv
+...............................................
+B.B
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+Y.Y
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+C.C
+0:PUSH
+1:self.C.msgc1( )
+2:self.C.msgc1( )
+3:POP 1 false
+4:endMethod
+...............................................
+Z.Z
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+C.msgc1
+0:PUSH
+1:s_a1 = 2
+2:s_a2 = 2
+3:s_b1 = 3
+4:s_b2 = 3
+5:s_c1 = 4
+6:s_c1 = 4
+7:self.A.msga1( )
+8:self.A.msga2( )
+9:self.B.msgb1( )
+10:declare $TEMP_EXP$2
+11:self.A.methoda1$int$int( ) ->  -> $TEMP_EXP$2
+12:declare $TEMP_EXP$3
+13:self.C.methodc1( ) ->  -> $TEMP_EXP$3
+14:declare $TEMP_EXP$4
+15:$TEMP_EXP$4 = $TEMP_EXP$2+$TEMP_EXP$3
+16:s_b1 = $TEMP_EXP$4
+17:declare $TEMP_EXP$5
+18:self.A.methoda1$int$int( ) ->  -> $TEMP_EXP$5
+19:declare $TEMP_EXP$6
+20:self.C.methodc1( ) ->  -> $TEMP_EXP$6
+21:declare $TEMP_EXP$7
+22:$TEMP_EXP$7 = $TEMP_EXP$5+$TEMP_EXP$6
+23:s_c1 = $TEMP_EXP$7
+24:POP 1 false
+25:endMsgsrv
+...............................................
+A.methoda1$int$int
+0:PUSH
+1:declare $TEMP_EXP$0
+2:$TEMP_EXP$0 = a+2
+3:declare $TEMP_EXP$1
+4:$TEMP_EXP$1 = $TEMP_EXP$0+b
+5:$RETURN_VALUE$ = $TEMP_EXP$1
+6:POP 1 false
+7:endMethod
+...............................................
+C:\Users\RayanTech\Desktop\Razi's project\org.rebecalang.modeltransformer\src\test\resources\org\rebecalang\modeltransformer\testcase\inheritance\self_and_normal_calls.rebeca
+]]></system-out>
+  </testcase>
+  <testcase name="useParentStateVarsInChildTest" classname="org.rebecalang.modeltransformer.RebecaToRILInheritanceTest" time="0.024">
+    <system-out><![CDATA[C:\Users\RayanTech\Desktop\Razi's project\org.rebecalang.modeltransformer\src\test\resources\org\rebecalang\modeltransformer\testcase\inheritance\use_parent_statevars_in_child.rebeca
+main
+0:PUSH
+1:new A( ):()
+2:new B( ):()
+3:new C( b->b, x->x, ):()
+4:new X( c->c, ):()
+5:POP 1 false
+...............................................
+B.B
+0:PUSH
+1:var_b = 0
+2:var_a = 2
+3:var_b = var_a
+4:POP 1 false
+5:endMethod
+...............................................
+X.X
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+X.testSender
+0:PUSH
+1:declare $TEMP_EXP$8
+2:$TEMP_EXP$8 = sender==c
+3:jump if not ($TEMP_EXP$8) <X.testSender8>
+4:PUSH
+5:var_x = 2
+6:var_x = 3
+7:POP 1 false
+8:POP 1 false
+9:endMsgsrv
+...............................................
+A.A
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+C.C
+0:PUSH
+1:var_a = 0
+2:var_b = 2
+3:var_c = var_a
+4:var_a = 2
+5:var_b = 0
+6:var_c = var_a
+7:self.C.testC( )
+8:POP 1 false
+9:endMethod
+...............................................
+C.testC
+0:PUSH
+1:x.X.testSender( )
+2:POP 1 false
+3:endMsgsrv
+...............................................
+]]></system-out>
+  </testcase>
+  <testcase name="generateDynamicPolymorphism" classname="org.rebecalang.modeltransformer.RebecaToRILInheritanceTest" time="0.046">
+    <system-out><![CDATA[B2.B2
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+A.method_ab$A
+0:PUSH
+1:declare a
+2:a = 3
+3:declare $TEMP_EXP$9
+4:$TEMP_EXP$9 = 1>2
+5:jump if not ($TEMP_EXP$9) <A.method_ab$A9>
+6:PUSH
+7:a = 2
+8:POP 1 false
+9:$RETURN_VALUE$ = a
+10:POP 1 false
+11:endMethod
+...............................................
+A.A
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+main
+0:PUSH
+1:new B2( ):()
+2:new C( inst_a->b2, ):()
+3:POP 1 false
+...............................................
+B.msg_ab
+0:PUSH
+1:var_a = 5
+2:POP 1 false
+3:endMsgsrv
+...............................................
+B.B
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+C.method_c
+0:PUSH
+1:$RETURN_VALUE$ = 7
+2:POP 1 false
+3:endMethod
+...............................................
+A.msg_ab
+0:PUSH
+1:var_a = 3
+2:POP 1 false
+3:endMsgsrv
+...............................................
+C.C
+0:PUSH
+1:self.C.msg_c( )
+2:POP 1 false
+3:endMethod
+...............................................
+B.method_ab$A
+0:PUSH
+1:reb_a.A.msg_ab( )
+2:POP 1 false
+3:endMethod
+...............................................
+C.msg_c
+0:PUSH
+1:inst_a.A.msg_ab( )
+2:s_c = 6
+3:POP 1 false
+4:endMsgsrv
+...............................................
+C:\Users\RayanTech\Desktop\Razi's project\org.rebecalang.modeltransformer\src\test\resources\org\rebecalang\modeltransformer\testcase\inheritance\dynamic_polymorphism.rebeca
+]]></system-out>
+  </testcase>
+  <testcase name="useParentsMethodsInChild" classname="org.rebecalang.modeltransformer.RebecaToRILInheritanceTest" time="0.012">
+    <system-out><![CDATA[main
+0:PUSH
+1:new C( ):()
+2:new A( known_c->c, ):()
+3:new B( ):()
+4:POP 1 false
+...............................................
+B.B
+0:PUSH
+1:self.B.testBMsg( )
+2:POP 1 false
+3:endMethod
+...............................................
+B.testBMsg
+0:PUSH
+1:known_c.C.getInt( )
+2:POP 1 false
+3:endMsgsrv
+...............................................
+C.getInt
+0:PUSH
+1:POP 1 false
+2:endMsgsrv
+...............................................
+A.A
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+C.C
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+C:\Users\RayanTech\Desktop\Razi's project\org.rebecalang.modeltransformer\src\test\resources\org\rebecalang\modeltransformer\testcase\inheritance\use_parents_methods_in_child.rebeca
+]]></system-out>
+  </testcase>
+  <testcase name="generateInterfaceAndAbstractResult" classname="org.rebecalang.modeltransformer.RebecaToRILInheritanceTest" time="0.01">
+    <system-out><![CDATA[main
+0:PUSH
+1:new R2( ):()
+2:POP 1 false
+...............................................
+R1.R1
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+R2.i1_2test
+0:PUSH
+1:self.R1.i1test( )
+2:POP 1 false
+3:endMsgsrv
+...............................................
+R1.i1test
+0:PUSH
+1:POP 1 false
+2:endMsgsrv
+...............................................
+R2.i1abstract
+0:PUSH
+1:POP 1 false
+2:endMsgsrv
+...............................................
+R2.R2
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+R2.i2test
+0:PUSH
+1:POP 1 false
+2:endMsgsrv
+...............................................
+R2.i1methodAbs
+0:PUSH
+1:$RETURN_VALUE$ = 2
+2:POP 1 false
+3:endMethod
+...............................................
+C:\Users\RayanTech\Desktop\Razi's project\org.rebecalang.modeltransformer\src\test\resources\org\rebecalang\modeltransformer\testcase\inheritance\interface_abstract.rebeca
+]]></system-out>
+  </testcase>
+  <testcase name="generateHomonymousResult" classname="org.rebecalang.modeltransformer.RebecaToRILInheritanceTest" time="0.02">
+    <system-out><![CDATA[C:\Users\RayanTech\Desktop\Razi's project\org.rebecalang.modeltransformer\src\test\resources\org\rebecalang\modeltransformer\testcase\inheritance\homonymous_attributes.rebeca
+B.testBMsg
+0:PUSH
+1:POP 1 false
+2:endMsgsrv
+...............................................
+A.A
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+X.X
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+main
+0:PUSH
+1:new X( ):()
+2:new X( ):()
+3:new Y( ):()
+4:new Y( ):()
+5:new Z( ):()
+6:new A( known_xy->x, ):()
+7:new B( known_xy->x, known_y->x2, ):()
+8:new C( known_z->x, ):()
+9:POP 1 false
+...............................................
+A.methodB
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+Y.Y
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+B.B
+0:PUSH
+1:declare tempY
+2:tempY = known_xy
+3:s_y = 2
+4:POP 1 false
+5:endMethod
+...............................................
+C.C
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+Z.Z
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+B.methodB
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+A.testBMsg
+0:PUSH
+1:POP 1 false
+2:endMsgsrv
+...............................................
+C.getInt
+0:PUSH
+1:$RETURN_VALUE$ = 2
+2:POP 1 false
+3:endMethod
+...............................................
+]]></system-out>
+  </testcase>
+  <testcase name="generateInstanceOfResult" classname="org.rebecalang.modeltransformer.RebecaToRILInheritanceTest" time="0.022">
+    <system-out><![CDATA[C:\Users\RayanTech\Desktop\Razi's project\org.rebecalang.modeltransformer\src\test\resources\org\rebecalang\modeltransformer\testcase\inheritance\instanceof_expression.rebeca
+main
+0:PUSH
+1:new R1( adj_r1->r1_2, ):()
+2:new R1( adj_r1->r1, ):()
+3:new R2( adj_r2->r2_2, ):()
+4:new R2( adj_r2->r2_2, ):()
+5:POP 1 false
+...............................................
+R1.R1
+0:PUSH
+1:POP 1 false
+2:endMethod
+...............................................
+R2.msg2
+0:PUSH
+1:declare $TEMP_EXP$10
+2:$TEMP_EXP$10 = var_1>2
+3:jump if not ($TEMP_EXP$10) <R2.msg27>
+4:PUSH
+5:var_1 = 4
+6:POP 1 false
+7:declare temp_r1
+8:temp_r1 = adj_r1
+9:declare $TEMP_EXP$11
+10:$TEMP_EXP$11 = temp_r1instanceofR2
+11:jump if not ($TEMP_EXP$11) <R2.msg215>
+12:PUSH
+13:var_1 = 4
+14:POP 1 false
+15:self.R2.msg2_2( )
+16:POP 1 false
+17:endMsgsrv
+...............................................
+R2.msg2_2
+0:PUSH
+1:self.R2.msg2( )
+2:POP 1 false
+3:endMsgsrv
+...............................................
+R2.R2
+0:PUSH
+1:var_1 = 2
+2:self.R2.msg2( )
+3:POP 1 false
+4:endMethod
+...............................................
+]]></system-out>
+  </testcase>
+</testsuite>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.rebecalang.modeltransformer.RebecaToRILTest" time="0.097" tests="1" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="19"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1256"/>
+    <property name="java.class.path" value="C:\Users\RayanTech\.m2\repository\org\apache\maven\surefire\surefire-booter\3.2.2\surefire-booter-3.2.2.jar;C:\Users\RayanTech\.m2\repository\org\apache\maven\surefire\surefire-api\3.2.2\surefire-api-3.2.2.jar;C:\Users\RayanTech\.m2\repository\org\apache\maven\surefire\surefire-logger-api\3.2.2\surefire-logger-api-3.2.2.jar;C:\Users\RayanTech\.m2\repository\org\apache\maven\surefire\surefire-shared-utils\3.2.2\surefire-shared-utils-3.2.2.jar;C:\Users\RayanTech\.m2\repository\org\apache\maven\surefire\surefire-extensions-spi\3.2.2\surefire-extensions-spi-3.2.2.jar;C:\Users\RayanTech\Desktop\Razi&apos;s project\org.rebecalang.modeltransformer\target\test-classes;C:\Users\RayanTech\Desktop\Razi&apos;s project\org.rebecalang.modeltransformer\target\classes;C:\Users\RayanTech\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.2\junit-jupiter-api-5.7.2.jar;C:\Users\RayanTech\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\RayanTech\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\RayanTech\.m2\repository\org\junit\platform\junit-platform-commons\1.7.2\junit-platform-commons-1.7.2.jar;C:\Users\RayanTech\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.7.2\junit-jupiter-engine-5.7.2.jar;C:\Users\RayanTech\.m2\repository\org\junit\platform\junit-platform-engine\1.7.2\junit-platform-engine-1.7.2.jar;C:\Users\RayanTech\.m2\repository\commons-cli\commons-cli\1.4\commons-cli-1.4.jar;C:\Users\RayanTech\.m2\repository\org\rebecalang\compiler\2.25\compiler-2.25.jar;C:\Users\RayanTech\.m2\repository\com\sun\xml\bind\jaxb-core\2.3.0.1\jaxb-core-2.3.0.1.jar;C:\Users\RayanTech\.m2\repository\javax\xml\bind\jaxb-api\2.4.0-b180830.0359\jaxb-api-2.4.0-b180830.0359.jar;C:\Users\RayanTech\.m2\repository\javax\activation\javax.activation-api\1.2.0\javax.activation-api-1.2.0.jar;C:\Users\RayanTech\.m2\repository\com\sun\xml\bind\jaxb-impl\2.3.1\jaxb-impl-2.3.1.jar;C:\Users\RayanTech\.m2\repository\org\javassist\javassist\3.25.0-GA\javassist-3.25.0-GA.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-expression\6.1.3\spring-expression-6.1.3.jar;C:\Users\RayanTech\.m2\repository\org\antlr\antlr4\4.8-1\antlr4-4.8-1.jar;C:\Users\RayanTech\.m2\repository\org\antlr\antlr-runtime\3.5.2\antlr-runtime-3.5.2.jar;C:\Users\RayanTech\.m2\repository\org\antlr\ST4\4.3\ST4-4.3.jar;C:\Users\RayanTech\.m2\repository\org\abego\treelayout\org.abego.treelayout.core\1.0.3\org.abego.treelayout.core-1.0.3.jar;C:\Users\RayanTech\.m2\repository\org\glassfish\javax.json\1.0.4\javax.json-1.0.4.jar;C:\Users\RayanTech\.m2\repository\org\antlr\antlr4-runtime\4.8-1\antlr4-runtime-4.8-1.jar;C:\Users\RayanTech\.m2\repository\com\sun\xml\bind\jaxb-xjc\4.0.3\jaxb-xjc-4.0.3.jar;C:\Users\RayanTech\.m2\repository\javax\activation\activation\1.1.1\activation-1.1.1.jar;C:\Users\RayanTech\.m2\repository\org\glassfish\jaxb\jaxb-runtime\4.0.3\jaxb-runtime-4.0.3.jar;C:\Users\RayanTech\.m2\repository\org\glassfish\jaxb\jaxb-core\4.0.3\jaxb-core-4.0.3.jar;C:\Users\RayanTech\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.0\jakarta.xml.bind-api-4.0.0.jar;C:\Users\RayanTech\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.2\jakarta.activation-api-2.1.2.jar;C:\Users\RayanTech\.m2\repository\org\eclipse\angus\angus-activation\2.0.1\angus-activation-2.0.1.jar;C:\Users\RayanTech\.m2\repository\org\glassfish\jaxb\txw2\4.0.3\txw2-4.0.3.jar;C:\Users\RayanTech\.m2\repository\com\sun\istack\istack-commons-runtime\4.1.2\istack-commons-runtime-4.1.2.jar;C:\Users\RayanTech\.m2\repository\org\graalvm\js\js\21.1.0\js-21.1.0.jar;C:\Users\RayanTech\.m2\repository\org\graalvm\regex\regex\21.1.0\regex-21.1.0.jar;C:\Users\RayanTech\.m2\repository\org\graalvm\truffle\truffle-api\21.1.0\truffle-api-21.1.0.jar;C:\Users\RayanTech\.m2\repository\org\graalvm\sdk\graal-sdk\21.1.0\graal-sdk-21.1.0.jar;C:\Users\RayanTech\.m2\repository\com\ibm\icu\icu4j\69.1\icu4j-69.1.jar;C:\Users\RayanTech\.m2\repository\com\squareup\javapoet\1.10.0\javapoet-1.10.0.jar;C:\Users\RayanTech\.m2\repository\com\typesafe\akka\akka-actor_2.12\2.5.16\akka-actor_2.12-2.5.16.jar;C:\Users\RayanTech\.m2\repository\org\scala-lang\scala-library\2.12.6\scala-library-2.12.6.jar;C:\Users\RayanTech\.m2\repository\com\typesafe\config\1.3.3\config-1.3.3.jar;C:\Users\RayanTech\.m2\repository\org\scala-lang\modules\scala-java8-compat_2.12\0.8.0\scala-java8-compat_2.12-0.8.0.jar;C:\Users\RayanTech\.m2\repository\org\apache\velocity\velocity\1.7\velocity-1.7.jar;C:\Users\RayanTech\.m2\repository\commons-collections\commons-collections\3.2.1\commons-collections-3.2.1.jar;C:\Users\RayanTech\.m2\repository\commons-lang\commons-lang\2.4\commons-lang-2.4.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-core\6.0.16\spring-core-6.0.16.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-jcl\6.0.16\spring-jcl-6.0.16.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-context\6.0.16\spring-context-6.0.16.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-aop\6.0.16\spring-aop-6.0.16.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-beans\6.0.16\spring-beans-6.0.16.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-test\6.0.16\spring-test-6.0.16.jar;C:\Users\RayanTech\.m2\repository\org\apache\maven\surefire\surefire-junit-platform\3.2.2\surefire-junit-platform-3.2.2.jar;C:\Users\RayanTech\.m2\repository\org\apache\maven\surefire\common-java5\3.2.2\common-java5-3.2.2.jar;C:\Users\RayanTech\.m2\repository\org\junit\platform\junit-platform-launcher\1.7.2\junit-platform-launcher-1.7.2.jar"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Asia/Tehran"/>
+    <property name="user.country.format" value="IR"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="19"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="D:\Program Files\Java\jdk-19\bin"/>
+    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter C:\Users\RayanTech\AppData\Local\Temp\surefire13091333907164696363 ????-??-??T??-??-??_???-jvmRun1 surefire-20250216111937596_1tmp surefire_0-20250216111937596_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\RayanTech\Desktop\Razi&apos;s project\org.rebecalang.modeltransformer\target\test-classes;C:\Users\RayanTech\Desktop\Razi&apos;s project\org.rebecalang.modeltransformer\target\classes;C:\Users\RayanTech\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.2\junit-jupiter-api-5.7.2.jar;C:\Users\RayanTech\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\RayanTech\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\RayanTech\.m2\repository\org\junit\platform\junit-platform-commons\1.7.2\junit-platform-commons-1.7.2.jar;C:\Users\RayanTech\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.7.2\junit-jupiter-engine-5.7.2.jar;C:\Users\RayanTech\.m2\repository\org\junit\platform\junit-platform-engine\1.7.2\junit-platform-engine-1.7.2.jar;C:\Users\RayanTech\.m2\repository\commons-cli\commons-cli\1.4\commons-cli-1.4.jar;C:\Users\RayanTech\.m2\repository\org\rebecalang\compiler\2.25\compiler-2.25.jar;C:\Users\RayanTech\.m2\repository\com\sun\xml\bind\jaxb-core\2.3.0.1\jaxb-core-2.3.0.1.jar;C:\Users\RayanTech\.m2\repository\javax\xml\bind\jaxb-api\2.4.0-b180830.0359\jaxb-api-2.4.0-b180830.0359.jar;C:\Users\RayanTech\.m2\repository\javax\activation\javax.activation-api\1.2.0\javax.activation-api-1.2.0.jar;C:\Users\RayanTech\.m2\repository\com\sun\xml\bind\jaxb-impl\2.3.1\jaxb-impl-2.3.1.jar;C:\Users\RayanTech\.m2\repository\org\javassist\javassist\3.25.0-GA\javassist-3.25.0-GA.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-expression\6.1.3\spring-expression-6.1.3.jar;C:\Users\RayanTech\.m2\repository\org\antlr\antlr4\4.8-1\antlr4-4.8-1.jar;C:\Users\RayanTech\.m2\repository\org\antlr\antlr-runtime\3.5.2\antlr-runtime-3.5.2.jar;C:\Users\RayanTech\.m2\repository\org\antlr\ST4\4.3\ST4-4.3.jar;C:\Users\RayanTech\.m2\repository\org\abego\treelayout\org.abego.treelayout.core\1.0.3\org.abego.treelayout.core-1.0.3.jar;C:\Users\RayanTech\.m2\repository\org\glassfish\javax.json\1.0.4\javax.json-1.0.4.jar;C:\Users\RayanTech\.m2\repository\org\antlr\antlr4-runtime\4.8-1\antlr4-runtime-4.8-1.jar;C:\Users\RayanTech\.m2\repository\com\sun\xml\bind\jaxb-xjc\4.0.3\jaxb-xjc-4.0.3.jar;C:\Users\RayanTech\.m2\repository\javax\activation\activation\1.1.1\activation-1.1.1.jar;C:\Users\RayanTech\.m2\repository\org\glassfish\jaxb\jaxb-runtime\4.0.3\jaxb-runtime-4.0.3.jar;C:\Users\RayanTech\.m2\repository\org\glassfish\jaxb\jaxb-core\4.0.3\jaxb-core-4.0.3.jar;C:\Users\RayanTech\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.0\jakarta.xml.bind-api-4.0.0.jar;C:\Users\RayanTech\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.2\jakarta.activation-api-2.1.2.jar;C:\Users\RayanTech\.m2\repository\org\eclipse\angus\angus-activation\2.0.1\angus-activation-2.0.1.jar;C:\Users\RayanTech\.m2\repository\org\glassfish\jaxb\txw2\4.0.3\txw2-4.0.3.jar;C:\Users\RayanTech\.m2\repository\com\sun\istack\istack-commons-runtime\4.1.2\istack-commons-runtime-4.1.2.jar;C:\Users\RayanTech\.m2\repository\org\graalvm\js\js\21.1.0\js-21.1.0.jar;C:\Users\RayanTech\.m2\repository\org\graalvm\regex\regex\21.1.0\regex-21.1.0.jar;C:\Users\RayanTech\.m2\repository\org\graalvm\truffle\truffle-api\21.1.0\truffle-api-21.1.0.jar;C:\Users\RayanTech\.m2\repository\org\graalvm\sdk\graal-sdk\21.1.0\graal-sdk-21.1.0.jar;C:\Users\RayanTech\.m2\repository\com\ibm\icu\icu4j\69.1\icu4j-69.1.jar;C:\Users\RayanTech\.m2\repository\com\squareup\javapoet\1.10.0\javapoet-1.10.0.jar;C:\Users\RayanTech\.m2\repository\com\typesafe\akka\akka-actor_2.12\2.5.16\akka-actor_2.12-2.5.16.jar;C:\Users\RayanTech\.m2\repository\org\scala-lang\scala-library\2.12.6\scala-library-2.12.6.jar;C:\Users\RayanTech\.m2\repository\com\typesafe\config\1.3.3\config-1.3.3.jar;C:\Users\RayanTech\.m2\repository\org\scala-lang\modules\scala-java8-compat_2.12\0.8.0\scala-java8-compat_2.12-0.8.0.jar;C:\Users\RayanTech\.m2\repository\org\apache\velocity\velocity\1.7\velocity-1.7.jar;C:\Users\RayanTech\.m2\repository\commons-collections\commons-collections\3.2.1\commons-collections-3.2.1.jar;C:\Users\RayanTech\.m2\repository\commons-lang\commons-lang\2.4\commons-lang-2.4.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-core\6.0.16\spring-core-6.0.16.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-jcl\6.0.16\spring-jcl-6.0.16.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-context\6.0.16\spring-context-6.0.16.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-aop\6.0.16\spring-aop-6.0.16.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-beans\6.0.16\spring-beans-6.0.16.jar;C:\Users\RayanTech\.m2\repository\org\springframework\spring-test\6.0.16\spring-test-6.0.16.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\RayanTech"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2022-09-20"/>
+    <property name="java.home" value="D:\Program Files\Java\jdk-19"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\RayanTech\Desktop\Razi&apos;s project\org.rebecalang.modeltransformer"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="19+36-2238"/>
+    <property name="user.name" value="RayanTech"/>
+    <property name="stdout.encoding" value="Cp1256"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\RayanTech\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\RAYANT~1\AppData\Local\Temp\"/>
+    <property name="idea.version" value="2024.1.2"/>
+    <property name="java.version" value="19"/>
+    <property name="user.dir" value="C:\Users\RayanTech\Desktop\Razi&apos;s project\org.rebecalang.modeltransformer"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.language.format" value="fa"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1256"/>
+    <property name="java.library.path" value="D:\Program Files\Java\jdk-19\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Java\jdk-17\bin;C:\Program Files\MATLAB\R2024a\runtime\win64;C:\Program Files\MATLAB\R2024a\bin;C:\MinGW\bin;C:\Users\RayanTech\MinGW\bin;C:\Users\RayanTech\Programs\Python\Python312\Scripts\;C:\Users\RayanTech\Programs\Python\Python312\;C:\Users\RayanTech\AppData\Local\Microsoft\WindowsApps;C:\Users\RayanTech\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2024.1.2\bin;;C:\Users\RayanTech\AppData\Roaming\npm;C:\altera\13.0sp1\modelsim_ase\win32aloem;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1256"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="19+36-2238"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="63.0"/>
+  </properties>
+  <testcase name="generateDiningPhilosophers" classname="org.rebecalang.modeltransformer.RebecaToRILTest" time="0.084">
+    <system-out><![CDATA[main
+0:PUSH
+1:new Node( nodeL->node4, nodeR->node2, ):(myId->1, )
+2:new Node( nodeL->node1, nodeR->node3, ):(myId->2, )
+3:new Node( nodeL->node2, nodeR->node4, ):(myId->3, )
+4:new Node( nodeL->node3, nodeR->node1, ):(myId->4, )
+5:POP 1 false
+...............................................
+Node.Node$int
+0:PUSH
+1:id = myId
+2:phase = 0
+3:oneResponseIsAlreadyReceived = true
+4:declare $TEMP_EXP$25
+5:$TEMP_EXP$25 = 1-null
+6:leaderId = $TEMP_EXP$25
+7:self.Node.broadcast$int$boolean$int( hopCount->0, msgId->id, out->false, )
+8:POP 1 false
+9:endMethod
+...............................................
+Node.broadcast$int$boolean$int
+0:PUSH
+1:jump if not (out) <Node.broadcast$int$boolean$int46>
+2:PUSH
+3:declare $TEMP_EXP$12
+4:$TEMP_EXP$12 = msgId==id
+5:jump if not ($TEMP_EXP$12) <Node.broadcast$int$boolean$int11>
+6:PUSH
+7:leaderId = id
+8:nodeR.Node.leaderIsElected$int( selectedLeaderId->id, )
+9:POP 1 false
+10:jump if not (null) <Node.broadcast$int$boolean$int44>
+11:PUSH
+12:declare $TEMP_EXP$13
+13:$TEMP_EXP$13 = hopCount==1
+14:jump if not ($TEMP_EXP$13) <Node.broadcast$int$boolean$int22>
+15:PUSH
+16:declare $TEMP_EXP$14
+17:$TEMP_EXP$14 = msgId<id
+18:jump if not ($TEMP_EXP$14) <Node.broadcast$int$boolean$int20>
+19:sender.Node.broadcast$int$boolean$int( hopCount->0, msgId->msgId, out->false, )
+20:POP 1 false
+21:jump if not (null) <Node.broadcast$int$boolean$int43>
+22:PUSH
+23:declare $TEMP_EXP$15
+24:$TEMP_EXP$15 = msgId<id
+25:jump if not ($TEMP_EXP$15) <Node.broadcast$int$boolean$int42>
+26:PUSH
+27:declare $TEMP_EXP$16
+28:$TEMP_EXP$16 = sender==nodeL
+29:jump if not ($TEMP_EXP$16) <Node.broadcast$int$boolean$int36>
+30:PUSH
+31:declare $TEMP_EXP$17
+32:$TEMP_EXP$17 = hopCount-1
+33:nodeR.Node.broadcast$int$boolean$int( hopCount->$TEMP_EXP$17, msgId->msgId, out->out, )
+34:POP 1 false
+35:jump if not (null) <Node.broadcast$int$boolean$int41>
+36:PUSH
+37:declare $TEMP_EXP$18
+38:$TEMP_EXP$18 = hopCount-1
+39:nodeL.Node.broadcast$int$boolean$int( hopCount->$TEMP_EXP$18, msgId->msgId, out->out, )
+40:POP 1 false
+41:POP 1 false
+42:POP 1 false
+43:POP 1 false
+44:POP 1 false
+45:jump if not (null) <Node.broadcast$int$boolean$int83>
+46:PUSH
+47:declare $TEMP_EXP$19
+48:$TEMP_EXP$19 = msgId==id
+49:jump if not ($TEMP_EXP$19) <Node.broadcast$int$boolean$int70>
+50:PUSH
+51:jump if not (oneResponseIsAlreadyReceived) <Node.broadcast$int$boolean$int65>
+52:PUSH
+53:declare $TEMP_EXP$20
+54:null.pow$double$double( arg0->2, arg1->phase, ) -> $TEMP_EXP$20
+55:nodeL.Node.broadcast$int$boolean$int( hopCount->$TEMP_EXP$20, msgId->id, out->true, )
+56:declare $TEMP_EXP$21
+57:null.pow$double$double( arg0->2, arg1->phase, ) -> $TEMP_EXP$21
+58:nodeR.Node.broadcast$int$boolean$int( hopCount->$TEMP_EXP$21, msgId->id, out->true, )
+59:declare $TEMP_EXP$22
+60:$TEMP_EXP$22 = phase
+61:phase = phase+1
+62:oneResponseIsAlreadyReceived = false
+63:POP 1 false
+64:jump if not (null) <Node.broadcast$int$boolean$int68>
+65:PUSH
+66:oneResponseIsAlreadyReceived = true
+67:POP 1 false
+68:POP 1 false
+69:jump if not (null) <Node.broadcast$int$boolean$int82>
+70:PUSH
+71:declare $TEMP_EXP$23
+72:$TEMP_EXP$23 = sender==nodeL
+73:jump if not ($TEMP_EXP$23) <Node.broadcast$int$boolean$int78>
+74:PUSH
+75:nodeR.Node.broadcast$int$boolean$int( hopCount->0, msgId->msgId, out->false, )
+76:POP 1 false
+77:jump if not (null) <Node.broadcast$int$boolean$int81>
+78:PUSH
+79:nodeL.Node.broadcast$int$boolean$int( hopCount->0, msgId->msgId, out->false, )
+80:POP 1 false
+81:POP 1 false
+82:POP 1 false
+83:POP 1 false
+84:endMsgsrv
+...............................................
+Node.leaderIsElected$int
+0:PUSH
+1:leaderId = selectedLeaderId
+2:declare $TEMP_EXP$24
+3:$TEMP_EXP$24 = leaderId!=id
+4:jump if not ($TEMP_EXP$24) <Node.leaderIsElected$int7>
+5:nodeR.Node.leaderIsElected$int( selectedLeaderId->selectedLeaderId, )
+6:jump if not (null) <Node.leaderIsElected$int8>
+7:self.Node.leaderIsElected$int( selectedLeaderId->id, )
+8:POP 1 false
+9:endMsgsrv
+...............................................
+]]></system-out>
+  </testcase>
+</testsuite>
