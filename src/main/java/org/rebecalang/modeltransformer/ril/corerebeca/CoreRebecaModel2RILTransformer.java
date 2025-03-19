@@ -3,17 +3,12 @@ package org.rebecalang.modeltransformer.ril.corerebeca;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
 import org.rebecalang.compiler.modelcompiler.SymbolTable;
 import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.*;
 import org.rebecalang.compiler.utils.CompilerExtension;
 import org.rebecalang.compiler.utils.CoreVersion;
 import org.rebecalang.compiler.utils.Pair;
-import org.rebecalang.modeltransformer.ril.AbstractRILModelTransformer;
-import org.rebecalang.modeltransformer.ril.RILModel;
-import org.rebecalang.modeltransformer.ril.RILUtilities;
-import org.rebecalang.modeltransformer.ril.Rebeca2RILExpressionTranslatorContainer;
-import org.rebecalang.modeltransformer.ril.Rebeca2RILStatementTranslatorContainer;
+import org.rebecalang.modeltransformer.ril.*;
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.EndMethodInstructionBean;
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.EndMsgSrvInstructionBean;
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.InstructionBean;
@@ -52,9 +47,9 @@ public class CoreRebecaModel2RILTransformer extends AbstractRILModelTransformer 
 	}
 
 	public void initializeTranslators() {
-		
+		System.out.println("calling this shit in core");
 		statementTranslatorContainer.registerTranslator(BlockStatement.class,
-				appContext.getBean(BlockStatementTranslator.class, 
+				appContext.getBean(BlockStatementTranslator.class,
 						statementTranslatorContainer,
 						expressionTranslatorContainer));
 		statementTranslatorContainer.registerTranslator(ReturnStatement.class,
@@ -111,7 +106,8 @@ public class CoreRebecaModel2RILTransformer extends AbstractRILModelTransformer 
 		expressionTranslatorContainer.registerTranslator(TermPrimary.class,
 				(TermPrimaryExpressionTranslator)appContext.getBean("CORE_REBECA_TERM_PRIMARY", 
 						expressionTranslatorContainer));
-		
+
+		System.out.println("core shit done");
 	}
 
 	@Override
@@ -128,9 +124,7 @@ public class CoreRebecaModel2RILTransformer extends AbstractRILModelTransformer 
 		expressionTranslatorContainer.setSymbolTable(model.getSecond());
 
 		List<FieldDeclaration> environmentVariables = rebecaModel.getRebecaCode().getEnvironmentVariables();
-		System.out.println("here are the env declarations: " + environmentVariables + " and the length is " + environmentVariables.size());
 		for (FieldDeclaration fieldDeclaration: environmentVariables) {
-			System.out.println("here are the env declarations: " + fieldDeclaration);
 			ArrayList<InstructionBean> instructions = getEnvDeclarationRIL(fieldDeclaration);
 			transformedRILModel.addEnvVariable("env_var", instructions);
 		}
@@ -186,7 +180,7 @@ public class CoreRebecaModel2RILTransformer extends AbstractRILModelTransformer 
 
 	protected ArrayList<InstructionBean> getEnvDeclarationRIL(Statement statement) {
 		ArrayList<InstructionBean> instructions = new ArrayList<InstructionBean>();
-		statementTranslatorContainer.translate(statement, instructions);
+		this.statementTranslatorContainer.translate(statement, instructions);
 		return instructions;
 	}
 }

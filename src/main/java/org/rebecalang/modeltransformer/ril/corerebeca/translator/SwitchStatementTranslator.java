@@ -34,7 +34,6 @@ public class SwitchStatementTranslator extends AbstractStatementTranslator {
 
 	@Override
 	public void translate(Statement statement, ArrayList<InstructionBean> instructions) {
-
 		SwitchStatement switchStatement = (SwitchStatement) statement;
 		List<SwitchStatementGroup> switchStatementGroups = switchStatement.getSwitchStatementGroups();
 		String computedMethodName = statementTranslatorContainer.getComputedMethodName();

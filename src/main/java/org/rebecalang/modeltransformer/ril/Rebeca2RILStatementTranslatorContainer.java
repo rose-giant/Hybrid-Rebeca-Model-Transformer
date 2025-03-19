@@ -11,11 +11,12 @@ import org.rebecalang.compiler.modelcompiler.hybridrebeca.objectmodel.PhysicalCl
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.InstructionBean;
 import org.rebecalang.modeltransformer.ril.corerebeca.translator.AbstractStatementTranslator;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-@Component
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Component
 public class Rebeca2RILStatementTranslatorContainer {
 
 	private SymbolTable symbolTable;
@@ -23,15 +24,17 @@ public class Rebeca2RILStatementTranslatorContainer {
 	private String computedMethodName;
 	private String computedModeName;
 	private ReactiveClassDeclaration reactiveClassDeclaration;
-	private PhysicalClassDeclaration physicalClassDeclaration;
-	
+
 	private Rebeca2RILExpressionTranslatorContainer expressionTranslatorContainer;
+	private PhysicalClassDeclaration physicalClassDeclaration;
 
 	public Rebeca2RILStatementTranslatorContainer() {
 		translators = new Hashtable<Class<? extends Statement>, AbstractStatementTranslator>();
 	}
 
 	public void translate(Statement statement, ArrayList<InstructionBean> instructions) {
+		System.out.println("statement translators are " + translators.size() + translators  );
+
 		if(statement instanceof Expression)
 			expressionTranslatorContainer.translate((Expression) statement, instructions);
 		else
@@ -60,11 +63,6 @@ public class Rebeca2RILStatementTranslatorContainer {
 		this.setComputedMethodName(computedMethodName);
 	}
 
-	public void preparePhysical(PhysicalClassDeclaration pcd, String computedModeName) {
-		this.setPhysicalClassDeclaration(pcd);
-		this.setComputedModeName(computedModeName);
-	}
-
 	public String getComputedMethodName() {
 		return computedMethodName;
 	}
@@ -81,18 +79,9 @@ public class Rebeca2RILStatementTranslatorContainer {
 		return reactiveClassDeclaration;
 	}
 
-	public PhysicalClassDeclaration getPhysicalClassDeclaration() {
-		return  physicalClassDeclaration;
-	}
-
 	public void setReactiveClassDeclaration(ReactiveClassDeclaration reactiveClassDeclaration) {
 		this.reactiveClassDeclaration = reactiveClassDeclaration;
 		expressionTranslatorContainer.setReactiveClassDeclaration(reactiveClassDeclaration);
-	}
-
-	public void setPhysicalClassDeclaration(PhysicalClassDeclaration physicalClassDeclaration) {
-		this.physicalClassDeclaration = physicalClassDeclaration;
-		expressionTranslatorContainer.setPhysicalClassDeclaration(physicalClassDeclaration);
 	}
 
 	public void setExpressionTranslatorContainer(
@@ -100,4 +89,18 @@ public class Rebeca2RILStatementTranslatorContainer {
 		this.expressionTranslatorContainer = expressionTranslatorContainer;
 		
 	}
+
+	public void preparePhysical(PhysicalClassDeclaration pcd, String computedModeName) {
+        this.setPhysicalClassDeclaration(pcd);
+        this.setComputedModeName(computedModeName);
+    }
+
+    public PhysicalClassDeclaration getPhysicalClassDeclaration() {
+        return  physicalClassDeclaration;
+    }
+
+    public void setPhysicalClassDeclaration(PhysicalClassDeclaration physicalClassDeclaration) {
+        this.physicalClassDeclaration = physicalClassDeclaration;
+        this.expressionTranslatorContainer.setPhysicalClassDeclaration(physicalClassDeclaration);
+    }
 }

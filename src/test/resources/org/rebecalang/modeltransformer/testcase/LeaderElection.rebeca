@@ -1,4 +1,6 @@
-reactiveclass Node(5) { 
+env int TEST_VAR = 0;
+
+reactiveclass Node(5) {
     knownrebecs { 
 	    Node nodeL; 
         Node nodeR; 

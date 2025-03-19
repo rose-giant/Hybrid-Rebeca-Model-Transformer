@@ -10,35 +10,33 @@ import org.rebecalang.compiler.modelcompiler.hybridrebeca.objectmodel.PhysicalCl
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.InstructionBean;
 import org.rebecalang.modeltransformer.ril.corerebeca.translator.expressiontranslator.AbstractExpressionTranslator;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-@Component
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Component
 public class Rebeca2RILExpressionTranslatorContainer {
 
 	Hashtable<Class<? extends Expression>, AbstractExpressionTranslator> translators;
 	private String computedMethodName;
 	private ReactiveClassDeclaration reactiveClassDeclaration;
-	private PhysicalClassDeclaration physicalClassDeclaration;
 	private SymbolTable symbolTable;
+	private PhysicalClassDeclaration physicalClassDeclaration;
 
 	public Rebeca2RILExpressionTranslatorContainer() {
 		translators = new Hashtable<Class<? extends Expression>, AbstractExpressionTranslator>();
 	}
 
 	public Object translate(Expression expression, ArrayList<InstructionBean> instructions) {
-
+		System.out.println("expression translators are " + translators.size() + translators  );
 		AbstractExpressionTranslator expressionTranslator = translators.get(expression.getClass());
 		Object expressionResult = expressionTranslator.translate(expression, instructions);
 		return expressionResult;
-
 	}
 
 	public AbstractExpressionTranslator getTranslator(Class<? extends Expression> clazz) {
-
 		return translators.get(clazz);
-
 	}
 
 	public void registerTranslator(Class<? extends Expression> clazz,
@@ -63,16 +61,8 @@ public class Rebeca2RILExpressionTranslatorContainer {
 		return reactiveClassDeclaration;
 	}
 
-	public PhysicalClassDeclaration getPhysicalClassDeclaration() {
-		return physicalClassDeclaration;
-	}
-
 	public void setReactiveClassDeclaration(ReactiveClassDeclaration reactiveClassDeclaration) {
 		this.reactiveClassDeclaration = reactiveClassDeclaration;
-	}
-
-	public void setPhysicalClassDeclaration(PhysicalClassDeclaration physicalClassDeclaration) {
-		this.physicalClassDeclaration = physicalClassDeclaration;
 	}
 
 	public void setSymbolTable(SymbolTable symbolTable) {
@@ -81,4 +71,12 @@ public class Rebeca2RILExpressionTranslatorContainer {
 	public SymbolTable getSymbolTable() {
 		return symbolTable;
 	}
+
+	public PhysicalClassDeclaration getPhysicalClassDeclaration() {
+        return physicalClassDeclaration;
+    }
+
+    public void setPhysicalClassDeclaration(PhysicalClassDeclaration physicalClassDeclaration) {
+        this.physicalClassDeclaration = physicalClassDeclaration;
+    }
 }

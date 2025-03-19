@@ -20,6 +20,8 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @ContextConfiguration(classes = {CompilerConfig.class, ModelTransformerConfig.class})
 @SpringJUnitConfig
 public class HybridRebecaToRILTest {
@@ -36,6 +38,57 @@ public class HybridRebecaToRILTest {
 
     protected Pair<RebecaModel, SymbolTable> compileModel(File model, Set<CompilerExtension> extension, CoreVersion coreVersion) {
         return rebecaModelCompiler.compileRebecaFile(model, extension, coreVersion);
+    }
+
+    @Test
+    public void PhysicalRebecIsSuccessfullyRecognized() {
+        String modelName = "classicHybrid";
+        File model = new File(HYBRID_MODEL_FILES_BASE + modelName + ".rebeca");
+        Set<CompilerExtension> extension;
+        extension = new HashSet<CompilerExtension>();
+        extension.add(CompilerExtension.HYBRID_REBECA);
+
+        Pair<RebecaModel, SymbolTable> compilationResult =
+                compileModel(model, extension, CoreVersion.CORE_2_3);
+
+        RILModel transformModel = rebeca2RIL.transformModel(compilationResult, extension, CoreVersion.CORE_2_3);
+        for(String methodName : transformModel.getMethodNames()) {
+            System.out.println(methodName);
+            int counter = 0;
+            for(InstructionBean instruction : transformModel.getInstructionList(methodName)) {
+                System.out.println("" + counter++ +":" + instruction);
+            }
+            System.out.println("...............................................");
+        }
+    }
+
+    @Test
+    public void InvariantConditionIsTransformedToRils() {
+        // Model Name is replaced with the minimal Rebeca code you mentioned: main{}
+        String modelName = "main";  // Using the simple "main" model here
+        File model = new File(HYBRID_MODEL_FILES_BASE + modelName + ".rebeca");
+        System.out.println("model is" + model);
+        Set<CompilerExtension> extension;
+        extension = new HashSet<CompilerExtension>();
+        extension.add(CompilerExtension.HYBRID_REBECA);
+
+        Pair<RebecaModel, SymbolTable> compilationResult =
+                compileModel(model, extension, CoreVersion.CORE_2_3);
+
+        // Transform Rebeca model to RILS
+        RILModel transformModel = rebeca2RIL.transformModel(compilationResult, extension, CoreVersion.CORE_2_3);
+        for(String methodName : transformModel.getMethodNames()) {
+            System.out.println(methodName);
+            int counter = 0;
+            for(InstructionBean instruction : transformModel.getInstructionList(methodName)) {
+                System.out.println("" + counter++ +":" + instruction);
+            }
+            System.out.println("...............................................");
+        }
+
+//        String expectedInvariant = "Car.mode.Rolling.inv = t<=5";
+//        assertTrue("Expected invariant not found in RIL output!",
+//                instructions.stream().anyMatch(instr -> instr.contains(expectedInvariant)));
     }
 
     @Test

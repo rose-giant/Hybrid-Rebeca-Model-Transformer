@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class PlusSubExpressionTranslator extends AbstractExpressionTranslator {
 
-
 	@Autowired
 	public PlusSubExpressionTranslator(Rebeca2RILExpressionTranslatorContainer expressionTranslatorContainer) {
 		super(expressionTranslatorContainer);
@@ -36,6 +35,5 @@ public class PlusSubExpressionTranslator extends AbstractExpressionTranslator {
 				psExpression.getOperator().substring(1)));
 		return tempVariable;
 	}
-
 
 }

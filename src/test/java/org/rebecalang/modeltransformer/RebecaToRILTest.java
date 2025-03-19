@@ -43,7 +43,7 @@ public class RebecaToRILTest {
 	}
 
 	@Test
-	public void generateDiningPhilosophers() {
+	public void generateLeaderElection() {
 		String modelName = "LeaderElection";
 		File model = new File(MODEL_FILES_BASE + modelName + ".rebeca");
 

@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class BinaryExpressionTranslator extends AbstractExpressionTranslator {
 
-
 	@Autowired
 	public BinaryExpressionTranslator(Rebeca2RILExpressionTranslatorContainer expressionTranslatorContainer) {
 		super(expressionTranslatorContainer);

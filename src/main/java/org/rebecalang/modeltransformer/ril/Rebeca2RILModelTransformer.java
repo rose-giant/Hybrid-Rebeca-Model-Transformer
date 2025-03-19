@@ -62,7 +62,7 @@ public class Rebeca2RILModelTransformer {
 			modelTransformer = timedRebecaModelTransformer;
 
 		}	else if (extension.contains(CompilerExtension.HYBRID_REBECA)) {
-				appContext.registerAlias("hybridRebecaTypeSystem", "typeSystem");
+			appContext.registerAlias("hybridRebecaTypeSystem", "typeSystem");
 				modelTransformer = hybrid2RILTransformer;
 
 		} else {

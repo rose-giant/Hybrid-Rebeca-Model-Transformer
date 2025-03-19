@@ -11,7 +11,6 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-
 @Component
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public abstract class AbstractExpressionTranslator {
@@ -21,15 +20,13 @@ public abstract class AbstractExpressionTranslator {
 	public final static String RETURN_METHOD_LINE = "$RETURN-LINE$";
 	public static final String RETURN_VALUE = "$RETURN_VALUE$";
 
-	
 	static int counter = 0;
 	public static Variable getTempVariable() {
 		return new Variable(TEMP_VAR_PREFIX + counter++);
 	}
 	
 	protected Rebeca2RILExpressionTranslatorContainer expressionTranslatorContainer;
-	
-	
+
 	@Autowired
 	public AbstractExpressionTranslator(Rebeca2RILExpressionTranslatorContainer expressionTranslatorContainer) {
 		this.expressionTranslatorContainer = expressionTranslatorContainer;
