@@ -31,7 +31,6 @@ public class FieldDeclarationTranslator extends AbstractStatementTranslator {
 
 	@Override
 	public void translate(Statement statement, ArrayList<InstructionBean> instructions) {
-
 		FieldDeclaration fieldDeclaration = (FieldDeclaration) statement;
 		List<VariableDeclarator> variableDeclarators = fieldDeclaration.getVariableDeclarators();
 		for (VariableDeclarator vd : variableDeclarators) {

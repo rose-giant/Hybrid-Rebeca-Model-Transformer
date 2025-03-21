@@ -47,7 +47,6 @@ public class CoreRebecaModel2RILTransformer extends AbstractRILModelTransformer 
 	}
 
 	public void initializeTranslators() {
-		System.out.println("calling this shit in core");
 		statementTranslatorContainer.registerTranslator(BlockStatement.class,
 				appContext.getBean(BlockStatementTranslator.class,
 						statementTranslatorContainer,
@@ -106,8 +105,6 @@ public class CoreRebecaModel2RILTransformer extends AbstractRILModelTransformer 
 		expressionTranslatorContainer.registerTranslator(TermPrimary.class,
 				(TermPrimaryExpressionTranslator)appContext.getBean("CORE_REBECA_TERM_PRIMARY", 
 						expressionTranslatorContainer));
-
-		System.out.println("core shit done");
 	}
 
 	@Override

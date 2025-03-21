@@ -14,6 +14,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import static java.util.Objects.isNull;
+
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Component
 public class Rebeca2RILExpressionTranslatorContainer {
@@ -29,7 +31,6 @@ public class Rebeca2RILExpressionTranslatorContainer {
 	}
 
 	public Object translate(Expression expression, ArrayList<InstructionBean> instructions) {
-		System.out.println("expression translators are " + translators.size() + translators  );
 		AbstractExpressionTranslator expressionTranslator = translators.get(expression.getClass());
 		Object expressionResult = expressionTranslator.translate(expression, instructions);
 		return expressionResult;

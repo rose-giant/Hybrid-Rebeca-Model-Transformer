@@ -2,9 +2,9 @@ package org.rebecalang.modeltransformer.ril.hybrid.rilinstruction;
 
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.InstructionBean;
 
-public class StartGuardInstructionBean extends InstructionBean {
+public class StartGuardBlockInstructionBean extends InstructionBean {
     String computedModeName;
-    public StartGuardInstructionBean(String computedModeName) {
+    public StartGuardBlockInstructionBean(String computedModeName) {
         super();
         this.computedModeName = computedModeName;
     }

@@ -3,7 +3,6 @@ package org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction;
 public class AssignmentInstructionBean extends InstructionBean {
 
 	Object leftVarName;
-
 	Object firstOperand;
 	Object secondOperand;
 

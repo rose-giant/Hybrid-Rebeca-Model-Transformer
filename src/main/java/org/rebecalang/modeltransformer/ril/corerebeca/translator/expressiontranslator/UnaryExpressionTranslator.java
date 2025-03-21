@@ -25,7 +25,6 @@ public class UnaryExpressionTranslator extends AbstractExpressionTranslator {
 
 	@Override
 	public Object translate(Expression expression, ArrayList<InstructionBean> instructions) {
-
 		UnaryExpression unaryExpression = (UnaryExpression) expression;
 		String operator = unaryExpression.getOperator();
 

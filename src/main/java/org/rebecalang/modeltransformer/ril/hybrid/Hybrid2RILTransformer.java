@@ -11,23 +11,19 @@ import org.rebecalang.modeltransformer.ril.corerebeca.CoreRebecaModel2RILTransfo
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.EndMethodInstructionBean;
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.EndMsgSrvInstructionBean;
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.InstructionBean;
-import org.rebecalang.modeltransformer.ril.corerebeca.translator.*;
-import org.rebecalang.modeltransformer.ril.corerebeca.translator.expressiontranslator.*;
 import org.rebecalang.modeltransformer.ril.hybrid.rilinstruction.*;
 import org.rebecalang.modeltransformer.ril.hybrid.translator.HybridRebecaTermPrimaryExpressionTranslator;
-import org.rebecalang.modeltransformer.ril.hybrid.translator.expressionTranslator.InvariantConditionTranslator;
-import org.rebecalang.modeltransformer.ril.timedrebeca.translator.TimedRebecaTermPrimaryExpressionTranslator;
+import org.rebecalang.modeltransformer.ril.hybrid.translator.expressionTranslator.UnbreakableConditionTranslator;
+import org.rebecalang.modeltransformer.ril.hybrid.translator.expressionTranslator.InvariantBlockTranslator;
+import org.rebecalang.modeltransformer.ril.hybrid.translator.expressionTranslator.InvariantODETranslator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-import static com.oracle.truffle.js.builtins.PolyglotBuiltins.PolyglotInternalBuiltins.PolyglotInternal.isNull;
 import static java.util.Objects.isNull;
 
 @Component
@@ -52,10 +48,9 @@ public class Hybrid2RILTransformer extends CoreRebecaModel2RILTransformer {
 
     @Override
     public void initializeTranslators() {
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         super.initializeTranslators();
-//        expressionTranslatorContainer.registerTranslator(TermPrimary.class,
-//                appContext.getBean(HybridRebecaTermPrimaryExpressionTranslator.class, expressionTranslatorContainer));
+        expressionTranslatorContainer.registerTranslator(HybridTermPrimary.class,
+                appContext.getBean(HybridRebecaTermPrimaryExpressionTranslator.class, expressionTranslatorContainer));
     }
 
     @Override
@@ -67,7 +62,6 @@ public class Hybrid2RILTransformer extends CoreRebecaModel2RILTransformer {
 
         RebecaModel rebecaModel = model.getFirst();
 
-        System.out.println("aaskdad"+isNull(expressionTranslatorContainer) + ", "+ isNull(statementTranslatorContainer));
         statementTranslatorContainer.setSymbolTable(model.getSecond());
         expressionTranslatorContainer.setSymbolTable(model.getSecond());
 
@@ -81,7 +75,7 @@ public class Hybrid2RILTransformer extends CoreRebecaModel2RILTransformer {
         HybridRebecaCode hybridRebecaCode = (HybridRebecaCode) rebecaModel.getRebecaCode();
         List <PhysicalClassDeclaration> physicalClassDeclarations = hybridRebecaCode.getPhysicalClassDeclaration();
         for (PhysicalClassDeclaration pcd : physicalClassDeclarations) {
-            for(MsgsrvDeclaration msgsrv : pcd.getMsgsrvs()) {
+            for(MsgsrvDeclaration msgsrv: pcd.getMsgsrvs()) {
                 if(msgsrv.isAbstract())
                     continue;
                 String computedMethodName = RILUtilities.computeMethodName(pcd, msgsrv);
@@ -115,7 +109,7 @@ public class Hybrid2RILTransformer extends CoreRebecaModel2RILTransformer {
 
         List<ReactiveClassDeclaration> reactiveClassDeclarations = rebecaModel.getRebecaCode().getReactiveClassDeclaration();
         for (ReactiveClassDeclaration rcd : reactiveClassDeclarations) {
-            for(MsgsrvDeclaration msgsrv : rcd.getMsgsrvs()) {
+            for(MsgsrvDeclaration msgsrv: rcd.getMsgsrvs()) {
                 if(msgsrv.isAbstract())
                     continue;
                 String computedMethodName = RILUtilities.computeMethodName(rcd, msgsrv);
@@ -163,8 +157,10 @@ public class Hybrid2RILTransformer extends CoreRebecaModel2RILTransformer {
         InvariantDeclaration invariantDeclaration = modeDeclaration.getInvariantDeclaration();
         instructions = generateInvariantRIL(invariantDeclaration, computedModeName);
 
+        instructions.add(new StartGuardBlockInstructionBean(computedModeName));
         GuardDeclaration guardDeclaration = modeDeclaration.getGuardDeclaration();
         instructions.addAll(generateGuardRIL(guardDeclaration, computedModeName));
+        instructions.add(new EndGuardInstructionBean());
 
         return instructions;
     }
@@ -172,29 +168,36 @@ public class Hybrid2RILTransformer extends CoreRebecaModel2RILTransformer {
     protected ArrayList<InstructionBean> generateInvariantRIL(InvariantDeclaration invariantDeclaration, String computedModeName) {
         ArrayList<InstructionBean> instructions = new ArrayList<InstructionBean>();
 
-//        System.out.println("in the method: "+isNull(expressionTranslatorContainer) + ", "+ isNull(statementTranslatorContainer));
-//        expressionTranslatorContainer.translate((NonBreakableExpression)invariantDeclaration.getCondition(), instructions);
-        System.out.println("here bitch");
         Expression invariantCondition = invariantDeclaration.getCondition();
-//        expressionTranslatorContainer.translate(invariantCondition, instructions);
-        InvariantConditionTranslator invariantConditionTranslator = new InvariantConditionTranslator(expressionTranslatorContainer);
+        UnbreakableConditionTranslator invariantConditionTranslator = new UnbreakableConditionTranslator(expressionTranslatorContainer);
         invariantConditionTranslator.setComputedModeName(computedModeName);
+        invariantConditionTranslator.setBeanClass(StartInvariantInstructionBean.class);
         instructions = (ArrayList<InstructionBean>) invariantConditionTranslator.translate(invariantCondition, instructions);
 
-//        statementTranslatorContainer.translate(invariantDeclaration.getBlock(), instructions);
-//        instructions.add(new EndInvariantInstructionBean());
+        Statement invariantODEBlock = invariantDeclaration.getBlock();
+        InvariantBlockTranslator invariantBlockTranslator = new InvariantBlockTranslator(statementTranslatorContainer, expressionTranslatorContainer);
+        invariantBlockTranslator.setComputedModeName(computedModeName);
+        invariantBlockTranslator.translate(invariantODEBlock, instructions);
+        BinaryExpression odeExpression = invariantBlockTranslator.getOdeBinaryExpression();
+
+        InvariantODETranslator invariantODETranslator = new InvariantODETranslator(expressionTranslatorContainer);
+        invariantODETranslator.setComputedModeName(computedModeName);
+        instructions = (ArrayList<InstructionBean>) invariantODETranslator.translate(odeExpression, instructions);
 
         return instructions;
     }
 
-//    protected ArrayList<InstructionBean> generateInvariant
-
     protected ArrayList<InstructionBean> generateGuardRIL(GuardDeclaration guardDeclaration, String computedModeName) {
         ArrayList<InstructionBean> instructions = new ArrayList<InstructionBean>();
 
-//        instructions.add(new StartGuardInstructionBean(computedModeName));
-//        this.statementTranslatorContainer.translate(guardDeclaration.getBlock(), instructions);
-//        instructions.add(new EndGuardInstructionBean());
+        Expression guardCondition = guardDeclaration.getCondition();
+        UnbreakableConditionTranslator invariantConditionTranslator = new UnbreakableConditionTranslator(expressionTranslatorContainer);
+        invariantConditionTranslator.setComputedModeName(computedModeName);
+        invariantConditionTranslator.setBeanClass(GuardConditionInstructionBean.class);
+        instructions = (ArrayList<InstructionBean>) invariantConditionTranslator.translate(guardCondition, instructions);
+
+        BlockStatement guardBlock = guardDeclaration.getBlock();
+        statementTranslatorContainer.translate(guardBlock, instructions);
 
         return instructions;
     }

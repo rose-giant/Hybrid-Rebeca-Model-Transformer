@@ -33,8 +33,6 @@ public class Rebeca2RILStatementTranslatorContainer {
 	}
 
 	public void translate(Statement statement, ArrayList<InstructionBean> instructions) {
-		System.out.println("statement translators are " + translators.size() + translators  );
-
 		if(statement instanceof Expression)
 			expressionTranslatorContainer.translate((Expression) statement, instructions);
 		else

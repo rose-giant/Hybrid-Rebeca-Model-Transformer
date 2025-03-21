@@ -35,6 +35,7 @@ physicalclass Car(1) {
     }
 
     msgsrv move() {
+        t = t + 8;
     }
 
     mode Rolling {

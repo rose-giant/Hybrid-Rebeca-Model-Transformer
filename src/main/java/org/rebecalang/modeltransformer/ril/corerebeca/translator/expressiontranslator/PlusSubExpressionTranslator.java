@@ -26,8 +26,7 @@ public class PlusSubExpressionTranslator extends AbstractExpressionTranslator {
 	@Override
 	public Object translate(Expression expression, ArrayList<InstructionBean> instructions) {
 		PlusSubExpression psExpression = (PlusSubExpression) expression;
-		Object evaluatedValue = expressionTranslatorContainer.translate(psExpression.getValue(),
-				instructions);
+		Object evaluatedValue = expressionTranslatorContainer.translate(psExpression.getValue(), instructions);
 		Variable tempVariable = AbstractExpressionTranslator.getTempVariable();
 		instructions.add(new DeclarationInstructionBean(tempVariable.getVarName()));
 		instructions.add(new AssignmentInstructionBean(tempVariable, evaluatedValue, null, null));

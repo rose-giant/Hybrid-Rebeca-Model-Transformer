@@ -29,6 +29,7 @@ public class BinaryExpressionTranslator extends AbstractExpressionTranslator {
 		String operator = binaryExpression.getOperator();
 		Object leftSide = expressionTranslatorContainer.translate(binaryExpression.getLeft(), instructions);
 		Object rightSide = expressionTranslatorContainer.translate(binaryExpression.getRight(), instructions);
+		System.out.println("binary exp here: " + leftSide + operator + rightSide);
 		if (!operator.equals("==") && !operator.equals("!=") && operator.endsWith("=")) {
 			AssignmentInstructionBean assignmentInstruction;
 			if (operator.equals("=")) {
