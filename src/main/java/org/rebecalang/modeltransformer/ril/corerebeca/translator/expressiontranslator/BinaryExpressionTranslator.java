@@ -23,31 +23,56 @@ public class BinaryExpressionTranslator extends AbstractExpressionTranslator {
 		super(expressionTranslatorContainer);
 	}
 
+	boolean instructionsToBeAdded = true;
+
+	public void setInstructionsToBeAdded(boolean instructionsToBeAdded) {
+		this.instructionsToBeAdded = instructionsToBeAdded;
+	}
+
+	public ArrayList<Object> getOperands() {
+		return operands;
+	}
+
+	public ArrayList<String> getOperators() {
+		return operators;
+	}
+
+	ArrayList<Object> operands = new ArrayList<>();
+	ArrayList<String> operators = new ArrayList<>();
+
 	@Override
 	public Object translate(Expression expression , ArrayList<InstructionBean> instructions) {
 		BinaryExpression binaryExpression = (BinaryExpression) expression;
 		String operator = binaryExpression.getOperator();
+		operators.add(operator);
+
 		Object leftSide = expressionTranslatorContainer.translate(binaryExpression.getLeft(), instructions);
+		operands.add(leftSide);
+
 		Object rightSide = expressionTranslatorContainer.translate(binaryExpression.getRight(), instructions);
+		operands.add(rightSide);
+
 		System.out.println("binary exp here: " + leftSide + operator + rightSide);
-		if (!operator.equals("==") && !operator.equals("!=") && operator.endsWith("=")) {
-			AssignmentInstructionBean assignmentInstruction;
-			if (operator.equals("=")) {
-				assignmentInstruction = new AssignmentInstructionBean(leftSide, rightSide, null, null);
+
+		if (instructionsToBeAdded) {
+			if (!operator.equals("==") && !operator.equals("!=") && operator.endsWith("=")) {
+				AssignmentInstructionBean assignmentInstruction;
+				if (operator.equals("=")) {
+					assignmentInstruction = new AssignmentInstructionBean(leftSide, rightSide, null, null);
+				} else {
+					assignmentInstruction = new AssignmentInstructionBean(leftSide,
+							leftSide, rightSide, String.valueOf(operator.charAt(0)));
+				}
+				instructions.add(assignmentInstruction);
 			} else {
-				assignmentInstruction = new AssignmentInstructionBean(leftSide,
-						leftSide, rightSide, String.valueOf(operator.charAt(0)));
+				Variable tempVariable = getTempVariable();
+				instructions.add(new DeclarationInstructionBean(tempVariable.getVarName()));
+				AssignmentInstructionBean assignmentInstruction = new AssignmentInstructionBean(tempVariable,
+						leftSide, rightSide, operator);
+				instructions.add(assignmentInstruction);
+				return tempVariable;
 			}
-			instructions.add(assignmentInstruction);				
-		} else {
-			Variable tempVariable = getTempVariable();
-			instructions.add(new DeclarationInstructionBean(tempVariable.getVarName()));
-			AssignmentInstructionBean assignmentInstruction = new AssignmentInstructionBean(tempVariable, 
-					leftSide, rightSide, operator);
-			instructions.add(assignmentInstruction);
-			return tempVariable;
 		}
-		
 		return null;
 	}
 

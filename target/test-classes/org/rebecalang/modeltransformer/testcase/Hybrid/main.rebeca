@@ -37,8 +37,8 @@ physicalclass Car(1) {
     }
 
     mode Rolling {
-        inv(t <= 2 + 5) {
-            t'' = 3;
+        inv(t <= 2) {
+            //t'' = 3;
             t' = 2;
         }
 

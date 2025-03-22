@@ -15,7 +15,6 @@ public class InvariantBlockTranslator extends AbstractStatementTranslator {
 
     public InvariantBlockTranslator(Rebeca2RILStatementTranslatorContainer statementTranslatorContainer, Rebeca2RILExpressionTranslatorContainer expressionTranslatorContainer) {
         super(statementTranslatorContainer, expressionTranslatorContainer);
-        System.out.println("exp container is " + isNull(expressionTranslatorContainer));
     }
 
     String computedModeName;
@@ -40,7 +39,6 @@ public class InvariantBlockTranslator extends AbstractStatementTranslator {
                     odeBinaryExpression = binaryExpr;
 
                     String operator = odeBinaryExpression.getOperator();
-                    System.out.println("classes aer " + odeBinaryExpression.getLeft().getClass() + odeBinaryExpression.getRight().getClass());
                     Object leftSide = expressionTranslatorContainer.translate(odeBinaryExpression.getLeft(), instructions);
                     Object rightSide = expressionTranslatorContainer.translate(odeBinaryExpression.getRight(), instructions);
                     System.out.println("ode binary exp is : " + leftSide + operator + rightSide);

@@ -164,11 +164,11 @@ public class Transform {
 				extensionLabel = "CoreRebeca";
 			}
 
-
 			Pair<RebecaModel, SymbolTable> compilationResult = 
 					transform.rebecaModelCompiler.compileRebecaFile(
 							rebecaFile, extension, coreVersion);
-			
+
+//			System.out.println("compilation ");
 			if (!transform.exceptionContainer.exceptionsIsEmpty()) {
 				return;
 			}

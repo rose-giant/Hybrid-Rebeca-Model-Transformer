@@ -30,9 +30,6 @@ import static java.util.Objects.isNull;
 @Qualifier("HYBRID_REBECA")
 public class Hybrid2RILTransformer extends CoreRebecaModel2RILTransformer {
 
-//    private HybridRebeca2RILStatementTranslatorContainer statementTranslatorContainer;
-//    private HybridRebeca2RILExpressionTranslatorContainer expressionTranslatorContainer;
-
     private Rebeca2RILStatementTranslatorContainer statementTranslatorContainer;
     private Rebeca2RILExpressionTranslatorContainer expressionTranslatorContainer;
 
@@ -43,7 +40,6 @@ public class Hybrid2RILTransformer extends CoreRebecaModel2RILTransformer {
         super(statementTranslatorContainer, expressionTranslatorContainer);
         this.statementTranslatorContainer = statementTranslatorContainer;
         this.expressionTranslatorContainer = expressionTranslatorContainer;
-        System.out.println(isNull(expressionTranslatorContainer) + ", "+ isNull(statementTranslatorContainer));
     }
 
     @Override
@@ -191,10 +187,10 @@ public class Hybrid2RILTransformer extends CoreRebecaModel2RILTransformer {
         ArrayList<InstructionBean> instructions = new ArrayList<InstructionBean>();
 
         Expression guardCondition = guardDeclaration.getCondition();
-        UnbreakableConditionTranslator invariantConditionTranslator = new UnbreakableConditionTranslator(expressionTranslatorContainer);
-        invariantConditionTranslator.setComputedModeName(computedModeName);
-        invariantConditionTranslator.setBeanClass(GuardConditionInstructionBean.class);
-        instructions = (ArrayList<InstructionBean>) invariantConditionTranslator.translate(guardCondition, instructions);
+        UnbreakableConditionTranslator guardConditionTranslator = new UnbreakableConditionTranslator(expressionTranslatorContainer);
+        guardConditionTranslator.setComputedModeName(computedModeName);
+        guardConditionTranslator.setBeanClass(GuardConditionInstructionBean.class);
+        instructions = (ArrayList<InstructionBean>) guardConditionTranslator.translate(guardCondition, instructions);
 
         BlockStatement guardBlock = guardDeclaration.getBlock();
         statementTranslatorContainer.translate(guardBlock, instructions);
