@@ -1,11 +1,16 @@
 package org.rebecalang.modeltransformer.ril.hybrid.rilinstruction;
 
-import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.Statement;
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.InstructionBean;
 
 public class StartODEInstructionBean extends InstructionBean {
     String computedModeName;
     String ode;
+    int odeIndex = 0;
+
+    public void setOdeIndex(int odeIndex) {
+        this.odeIndex = odeIndex;
+    }
+
     public StartODEInstructionBean(String computedModeName, String ode) {
         super();
         this.computedModeName = computedModeName;
@@ -14,6 +19,6 @@ public class StartODEInstructionBean extends InstructionBean {
 
     @Override
     public String toString() {
-        return this.computedModeName + ".ode = " + this.ode;
+        return this.computedModeName + ".ode$"+ this.odeIndex +" = " + this.ode;
     }
 }

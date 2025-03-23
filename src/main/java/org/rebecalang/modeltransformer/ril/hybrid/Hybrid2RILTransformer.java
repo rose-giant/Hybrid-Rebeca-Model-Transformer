@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static java.util.Objects.isNull;
 
 @Component
 @Qualifier("HYBRID_REBECA")
@@ -162,7 +161,7 @@ public class Hybrid2RILTransformer extends CoreRebecaModel2RILTransformer {
     }
 
     protected ArrayList<InstructionBean> generateInvariantRIL(InvariantDeclaration invariantDeclaration, String computedModeName) {
-        ArrayList<InstructionBean> instructions = new ArrayList<InstructionBean>();
+        ArrayList<InstructionBean> instructions = new ArrayList<>();
 
         Expression invariantCondition = invariantDeclaration.getCondition();
         UnbreakableConditionTranslator invariantConditionTranslator = new UnbreakableConditionTranslator(expressionTranslatorContainer);
@@ -179,6 +178,7 @@ public class Hybrid2RILTransformer extends CoreRebecaModel2RILTransformer {
         InvariantODETranslator invariantODETranslator = new InvariantODETranslator(expressionTranslatorContainer);
         invariantODETranslator.setComputedModeName(computedModeName);
         for (int i = 0; i < odeExpressions.size(); i++) {
+            invariantODETranslator.setOdeIndex(i + 1);
             instructions = (ArrayList<InstructionBean>) invariantODETranslator.translate(odeExpressions.get(i), instructions);
         }
 
@@ -186,7 +186,7 @@ public class Hybrid2RILTransformer extends CoreRebecaModel2RILTransformer {
     }
 
     protected ArrayList<InstructionBean> generateGuardRIL(GuardDeclaration guardDeclaration, String computedModeName) {
-        ArrayList<InstructionBean> instructions = new ArrayList<InstructionBean>();
+        ArrayList<InstructionBean> instructions = new ArrayList<>();
 
         Expression guardCondition = guardDeclaration.getCondition();
         UnbreakableConditionTranslator guardConditionTranslator = new UnbreakableConditionTranslator(expressionTranslatorContainer);
