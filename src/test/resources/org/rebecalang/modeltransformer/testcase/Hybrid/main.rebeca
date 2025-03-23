@@ -29,7 +29,7 @@ physicalclass Car(1) {
     }
 
     statevars {
-        int t;
+        @Real float t;
     }
 
     Car() {
@@ -44,6 +44,11 @@ physicalclass Car(1) {
 
         guard(t > 6) {
             t = 12;
+            int k;
+            if (t < 9) {
+                t = 11;
+            }
+
             //setMode(NotRolling);
         }
     }

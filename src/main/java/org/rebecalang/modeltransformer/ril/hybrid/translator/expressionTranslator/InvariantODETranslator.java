@@ -29,7 +29,7 @@ public class InvariantODETranslator extends AbstractExpressionTranslator {
 
         System.out.println("we have our cute ode " + leftSide + operator + rightSide);
 
-        String stringODEExpression = leftSide+ "' " + operator + rightSide;
+        String stringODEExpression = leftSide+ "'" + operator + rightSide;
         StartODEInstructionBean startODEInstructionBean = new StartODEInstructionBean(computedModeName, stringODEExpression);
         instructions.add(startODEInstructionBean);
         return instructions;

@@ -62,7 +62,6 @@ public class JumpIfNotInstructionBean extends InstructionBean {
 
 	@Override
 	public String toString() {
-		return "jump if not (" + condition + ") " + "<" + methodName + lineNumber + ">"; 
-
+		return "jump if not (" + condition + ") " + "<" + methodName + lineNumber + ">";
 	}
 }

@@ -93,9 +93,9 @@ public class HybridRebecaToRILTest {
     }
 
     @Test
-    public void generateRebecaToRils() {
+    public void generatePhysicalModeRIL() {
         // Model Name is replaced with the minimal Rebeca code you mentioned: main{}
-        String modelName = "main";  // Using the simple "main" model here
+        String modelName = "hybridMode";  // Using the simple "main" model here
         File model = new File(HYBRID_MODEL_FILES_BASE + modelName + ".rebeca");
         System.out.println("model is" + model);
         Set<CompilerExtension> extension;
@@ -118,9 +118,9 @@ public class HybridRebecaToRILTest {
     }
     
     @Test
-    public void generateRebecaToRils2() {
+    public void transformRebecaToRIL() {
         // Model Name is replaced with the minimal Rebeca code you mentioned: main{}
-        String modelName = "simplemodel";  // Using the simple "main" model here
+        String modelName = "main";  // Using the simple "main" model here
         File model = new File(HYBRID_MODEL_FILES_BASE + modelName + ".rebeca");
         System.out.println("model is" + model);
         Set<CompilerExtension> extension;

@@ -9,6 +9,8 @@ import org.rebecalang.modeltransformer.ril.Rebeca2RILExpressionTranslatorContain
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.InstructionBean;
 import org.rebecalang.modeltransformer.ril.corerebeca.translator.expressiontranslator.AbstractExpressionTranslator;
 import org.rebecalang.modeltransformer.ril.corerebeca.translator.expressiontranslator.BinaryExpressionTranslator;
+import org.rebecalang.modeltransformer.ril.hybrid.rilinstruction.StartGuardBlockInstructionBean;
+import org.rebecalang.modeltransformer.ril.hybrid.rilinstruction.StartUnbreakableConditionInstructionBean;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
@@ -33,16 +35,28 @@ public class UnbreakableConditionTranslator extends AbstractExpressionTranslator
     @Override
     public Object translate(Expression expression, ArrayList<InstructionBean> instructions) {
         BinaryExpression binaryExpression = (BinaryExpression) expression;
-        String operator = binaryExpression.getOperator();
-        Object leftSide = expressionTranslatorContainer.translate(binaryExpression.getLeft(), instructions);
-        Object rightSide = expressionTranslatorContainer.translate(binaryExpression.getRight(), instructions);
+        Object leftSide = new Object();
+        Object rightSide = new Object();
+//        if (binaryExpression.getLeft() instanceof TermPrimary) {
+//            leftSide = (TermPrimary) binaryExpression.getLeft();
+//            String type = ((TermPrimary) leftSide).getType().getTypeName();
+//            System.out.println("type of "+ leftSide +" is " + type);
+//        }
+//
+//        if (binaryExpression.getRight() instanceof TermPrimary) {
+//            rightSide = (TermPrimary) rightSide;
+//            String type = ((TermPrimary) rightSide).getType().getTypeName();
+//            System.out.println("type of "+ rightSide +" is " + type);
+//        }
 
-//        System.out.println("we have " + leftSide + operator + rightSide);
-        String stringInvariantExpression = leftSide + operator + rightSide;
+        String operator = binaryExpression.getOperator();
+        leftSide = expressionTranslatorContainer.translate(binaryExpression.getLeft(), instructions);
+        rightSide = expressionTranslatorContainer.translate(binaryExpression.getRight(), instructions);
+        String stringBinaryExpression = leftSide + operator + rightSide;
 
         try {
             Constructor<? extends InstructionBean> constructor = instructionBean.getConstructor(String.class, String.class);
-            InstructionBean instruction = constructor.newInstance(computedModeName, stringInvariantExpression);
+            InstructionBean instruction = constructor.newInstance(computedModeName, stringBinaryExpression);
 
             instructions.add(instruction);
             return instructions;

@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.BinaryExpression;
 import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.Expression;
+import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.TermPrimary;
 import org.rebecalang.modeltransformer.ril.Rebeca2RILExpressionTranslatorContainer;
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.AssignmentInstructionBean;
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.DeclarationInstructionBean;
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.InstructionBean;
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.Variable;
+import org.rebecalang.modeltransformer.ril.hybrid.rilinstruction.StartUnbreakableConditionInstructionBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -52,7 +54,33 @@ public class BinaryExpressionTranslator extends AbstractExpressionTranslator {
 		Object rightSide = expressionTranslatorContainer.translate(binaryExpression.getRight(), instructions);
 		operands.add(rightSide);
 
+		String leftType = "";
+		String rightType = "";
+		if (binaryExpression.getLeft() instanceof TermPrimary) {
+//			leftSide = (TermPrimary) leftSide;
+			leftType = String.valueOf(((TermPrimary) binaryExpression.getLeft()).getType().getTypeName());
+			System.out.println("type of "+ leftSide +" is " + leftType);
+		}
+
+		if (binaryExpression.getRight() instanceof TermPrimary) {
+//			rightSide = (TermPrimary) rightSide;
+			rightType = String.valueOf(((TermPrimary) binaryExpression.getRight()).getType().getTypeName());
+			System.out.println("type of "+ rightSide +" is " + rightType);
+		}
+
 		System.out.println("binary exp here: " + leftSide + operator + rightSide);
+		if (binaryExpression.getLeft() instanceof TermPrimary || binaryExpression.getRight() instanceof TermPrimary) {
+			System.out.println("here#1");
+			if (leftType == "float" || rightType == "float") {
+				System.out.println("here#2");
+				String stringBinaryExpression = leftSide + operator + rightSide;
+				if (operator.charAt(0) == '=') {
+					System.out.println("here#3");
+					return instructions.add(new AssignmentInstructionBean(leftSide, rightSide, null, null));
+				}
+				return new StartUnbreakableConditionInstructionBean(stringBinaryExpression);
+			}
+		}
 
 		if (instructionsToBeAdded) {
 			if (!operator.equals("==") && !operator.equals("!=") && operator.endsWith("=")) {
