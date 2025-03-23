@@ -31,6 +31,10 @@ public class UnaryExpressionTranslator extends AbstractExpressionTranslator {
 		Object translatedExpression = expressionTranslatorContainer
 				.translate(unaryExpression.getExpression(), instructions);
 
+		if (operator.charAt(0)=='-' || operator.charAt(0)=='+') {
+			return operator + translatedExpression.toString();
+		}
+
 		Variable tempVariable = getTempVariable();
 		instructions.add(new DeclarationInstructionBean(tempVariable.getVarName()));
 		AssignmentInstructionBean assignmentInstruction = null;

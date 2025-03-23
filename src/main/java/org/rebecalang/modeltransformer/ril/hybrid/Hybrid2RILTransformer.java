@@ -174,11 +174,13 @@ public class Hybrid2RILTransformer extends CoreRebecaModel2RILTransformer {
         InvariantBlockTranslator invariantBlockTranslator = new InvariantBlockTranslator(statementTranslatorContainer, expressionTranslatorContainer);
         invariantBlockTranslator.setComputedModeName(computedModeName);
         invariantBlockTranslator.translate(invariantODEBlock, instructions);
-        BinaryExpression odeExpression = invariantBlockTranslator.getOdeBinaryExpression();
+        ArrayList<BinaryExpression> odeExpressions = invariantBlockTranslator.getOdeBinaryExpressions();
 
         InvariantODETranslator invariantODETranslator = new InvariantODETranslator(expressionTranslatorContainer);
         invariantODETranslator.setComputedModeName(computedModeName);
-        instructions = (ArrayList<InstructionBean>) invariantODETranslator.translate(odeExpression, instructions);
+        for (int i = 0; i < odeExpressions.size(); i++) {
+            instructions = (ArrayList<InstructionBean>) invariantODETranslator.translate(odeExpressions.get(i), instructions);
+        }
 
         return instructions;
     }

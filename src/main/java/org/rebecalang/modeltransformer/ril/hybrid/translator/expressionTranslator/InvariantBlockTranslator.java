@@ -23,24 +23,25 @@ public class InvariantBlockTranslator extends AbstractStatementTranslator {
     }
 
     ArrayList<BinaryExpression> odeBinaryExpressions = new ArrayList<>();
-    BinaryExpression odeBinaryExpression;
+//    BinaryExpression odeBinaryExpression;
 
-    public BinaryExpression getOdeBinaryExpression() {
-        return odeBinaryExpression;
+    public ArrayList<BinaryExpression> getOdeBinaryExpressions() {
+        return odeBinaryExpressions;
     }
 
     @Override
     public void translate(Statement statement, ArrayList<InstructionBean> instructions) {
         if (statement instanceof BlockStatement) {
             BlockStatement blockStatement = (BlockStatement) statement;
+
             for (Statement insideStatement : blockStatement.getStatements()) {
                 if (insideStatement instanceof BinaryExpression) {
                     BinaryExpression binaryExpr = (BinaryExpression) insideStatement;
-                    odeBinaryExpression = binaryExpr;
+                        odeBinaryExpressions.add(binaryExpr);
 
-                    String operator = odeBinaryExpression.getOperator();
-                    Object leftSide = expressionTranslatorContainer.translate(odeBinaryExpression.getLeft(), instructions);
-                    Object rightSide = expressionTranslatorContainer.translate(odeBinaryExpression.getRight(), instructions);
+                    String operator = binaryExpr.getOperator();
+                    Object leftSide = expressionTranslatorContainer.translate(binaryExpr.getLeft(), instructions);
+                    Object rightSide = expressionTranslatorContainer.translate(binaryExpr.getRight(), instructions);
                     System.out.println("ode binary exp is : " + leftSide + operator + rightSide);
                 }
             }
