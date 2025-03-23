@@ -43,7 +43,7 @@ physicalclass Car(1) {
         }
 
         guard(t > 6) {
-            t = 12;
+            t = 12.2;
             int k;
             if (t < 9) {
                 t = 11;

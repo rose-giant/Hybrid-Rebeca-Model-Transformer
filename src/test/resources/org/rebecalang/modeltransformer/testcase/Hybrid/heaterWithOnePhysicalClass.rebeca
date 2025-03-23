@@ -27,7 +27,7 @@ physicalclass HeaterWithSensor(3) {
 		}
 		guard(timer==0.05){
 			timer = 0;
-			//controller.control(tempr);
+			controller.control(tempr);
 		}
 	}
 

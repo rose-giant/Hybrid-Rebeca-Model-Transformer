@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.rebecalang.compiler.modelcompiler.corerebeca.CoreRebecaTypeSystem;
 import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.Expression;
 import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.Literal;
+import org.rebecalang.compiler.modelcompiler.hybridrebeca.HybridRebecaTypeSystem;
 import org.rebecalang.modeltransformer.ril.Rebeca2RILExpressionTranslatorContainer;
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.InstructionBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,10 @@ public class LiteralStatementTranslator extends AbstractExpressionTranslator {
 	@Override
 	public Object translate(Expression expression, ArrayList<InstructionBean> instructions) {
 		Literal literal = (Literal) expression;
+		if (literal.getType().canTypeCastTo(HybridRebecaTypeSystem.FLOAT_TYPE))
+			return Float.parseFloat(literal.getLiteralValue());
+		if (literal.getType().canTypeCastTo(HybridRebecaTypeSystem.DOUBLE_TYPE))
+			return Double.parseDouble(literal.getLiteralValue());
 		if(literal.getType().canTypeCastTo(CoreRebecaTypeSystem.INT_TYPE))
 			return Integer.parseInt(literal.getLiteralValue());
 		if(literal.getType().canTypeCastTo(CoreRebecaTypeSystem.DOUBLE_TYPE))
