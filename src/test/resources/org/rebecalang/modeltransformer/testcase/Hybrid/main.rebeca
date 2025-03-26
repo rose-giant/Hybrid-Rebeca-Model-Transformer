@@ -1,29 +1,6 @@
 env int NET_DELAY = 1;
 env int TEST_VAR = 0;
 
-reactiveclass Idol(5) {
-    knownrebecs {
-    }
-
-    statevars {
-    }
-
-    Idol() {
-        self.perform();
-    }
-
-    msgsrv perform() {
-        int w = TEST_VAR;
-        int c = doNothing();
-    }
-
-    int doNothing() {
-        int a = ?(1, 2, 3);
-        return a;
-    }
-
-}
-
 physicalclass Car(1) {
     knownrebecs {
     }
@@ -33,28 +10,22 @@ physicalclass Car(1) {
     }
 
     Car() {
-
     }
 
     mode Rolling {
         inv(t <= 2) {
-            //t'' = 3;
-            t' = 2;
+            t' = 2 + 3.1;
         }
 
-        guard(t > 6) {
-            t = 12.2;
-            int k;
-            if (t < 9) {
-                t = 11;
-            }
-
-            //setMode(NotRolling);
+        guard(t == 1) {
+           // float k = 0;
+            t = 6.6 + 1;
         }
     }
+
 }
 
 main {
-      Idol idol():();
-      Car car():();
+   // Idol idol():();
+    Car car():();
 }

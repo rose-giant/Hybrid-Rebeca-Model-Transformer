@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.BinaryExpression;
 import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.Expression;
+import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.Literal;
 import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.TermPrimary;
 import org.rebecalang.modeltransformer.ril.Rebeca2RILExpressionTranslatorContainer;
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.AssignmentInstructionBean;
@@ -57,50 +58,67 @@ public class BinaryExpressionTranslator extends AbstractExpressionTranslator {
 		String leftType = "";
 		String rightType = "";
 		if (binaryExpression.getLeft() instanceof TermPrimary) {
-//			leftSide = (TermPrimary) leftSide;
 			leftType = String.valueOf(((TermPrimary) binaryExpression.getLeft()).getType().getTypeName());
-			System.out.println("type of "+ leftSide +" is " + leftType);
+		} else if (binaryExpression.getLeft() instanceof Literal) {
+			leftType = String.valueOf(((Literal) binaryExpression.getLeft()).getType().getTypeName());
+		} else if (binaryExpression.getLeft() instanceof BinaryExpression) {
+			leftType = "double";
 		}
 
 		if (binaryExpression.getRight() instanceof TermPrimary) {
-//			rightSide = (TermPrimary) rightSide;
 			rightType = String.valueOf(((TermPrimary) binaryExpression.getRight()).getType().getTypeName());
-			System.out.println("type of "+ rightSide +" is " + rightType);
+		} else if (binaryExpression.getRight() instanceof Literal) {
+			rightType = String.valueOf(((Literal) binaryExpression.getRight()).getType().getTypeName());
+		} else if (binaryExpression.getRight() instanceof BinaryExpression) {
+			rightType = "double";
 		}
 
 		System.out.println("binary exp here: " + leftSide + operator + rightSide);
-		if (binaryExpression.getLeft() instanceof TermPrimary || binaryExpression.getRight() instanceof TermPrimary) {
-			System.out.println("here#1");
-			if (leftType == "float" || rightType == "float") {
-				System.out.println("here#2");
+			if (leftType == "float" || rightType == "float" || leftType == "double" || rightType == "double") {
 				String stringBinaryExpression = leftSide + operator + rightSide;
-				if (operator.charAt(0) == '=') {
-					System.out.println("here#3");
-					return instructions.add(new AssignmentInstructionBean(leftSide, rightSide, null, null));
-				}
 				return new StartUnbreakableConditionInstructionBean(stringBinaryExpression);
-			}
-		}
 
-		if (instructionsToBeAdded) {
-			if (!operator.equals("==") && !operator.equals("!=") && operator.endsWith("=")) {
-				AssignmentInstructionBean assignmentInstruction;
-				if (operator.equals("=")) {
-					assignmentInstruction = new AssignmentInstructionBean(leftSide, rightSide, null, null);
-				} else {
-					assignmentInstruction = new AssignmentInstructionBean(leftSide,
-							leftSide, rightSide, String.valueOf(operator.charAt(0)));
-				}
-				instructions.add(assignmentInstruction);
 			} else {
-				Variable tempVariable = getTempVariable();
-				instructions.add(new DeclarationInstructionBean(tempVariable.getVarName()));
-				AssignmentInstructionBean assignmentInstruction = new AssignmentInstructionBean(tempVariable,
-						leftSide, rightSide, operator);
-				instructions.add(assignmentInstruction);
-				return tempVariable;
+
+				if (!operator.equals("==") && !operator.equals("!=") && operator.endsWith("=")) {
+					AssignmentInstructionBean assignmentInstruction;
+					if (operator.equals("=")) {
+						assignmentInstruction = new AssignmentInstructionBean(leftSide, rightSide, null, null);
+					} else {
+						assignmentInstruction = new AssignmentInstructionBean(leftSide,
+								leftSide, rightSide, String.valueOf(operator.charAt(0)));
+					}
+					instructions.add(assignmentInstruction);
+				} else {
+					Variable tempVariable = getTempVariable();
+					instructions.add(new DeclarationInstructionBean(tempVariable.getVarName()));
+					AssignmentInstructionBean assignmentInstruction = new AssignmentInstructionBean(tempVariable,
+							leftSide, rightSide, operator);
+					instructions.add(assignmentInstruction);
+					return tempVariable;
+				}
 			}
-		}
+//		}
+
+//		if (instructionsToBeAdded) {
+//			if (!operator.equals("==") && !operator.equals("!=") && operator.endsWith("=")) {
+//				AssignmentInstructionBean assignmentInstruction;
+//				if (operator.equals("=")) {
+//					assignmentInstruction = new AssignmentInstructionBean(leftSide, rightSide, null, null);
+//				} else {
+//					assignmentInstruction = new AssignmentInstructionBean(leftSide,
+//							leftSide, rightSide, String.valueOf(operator.charAt(0)));
+//				}
+//				instructions.add(assignmentInstruction);
+//			} else {
+//				Variable tempVariable = getTempVariable();
+//				instructions.add(new DeclarationInstructionBean(tempVariable.getVarName()));
+//				AssignmentInstructionBean assignmentInstruction = new AssignmentInstructionBean(tempVariable,
+//						leftSide, rightSide, operator);
+//				instructions.add(assignmentInstruction);
+//				return tempVariable;
+//			}
+//		}
 		return null;
 	}
 

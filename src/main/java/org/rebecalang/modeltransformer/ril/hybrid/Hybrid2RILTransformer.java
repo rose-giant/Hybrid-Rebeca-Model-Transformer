@@ -185,6 +185,7 @@ public class Hybrid2RILTransformer extends CoreRebecaModel2RILTransformer {
         return instructions;
     }
 
+    //TODO: guard expressions are not fully transformed, fix them baby!
     protected ArrayList<InstructionBean> generateGuardRIL(GuardDeclaration guardDeclaration, String computedModeName) {
         ArrayList<InstructionBean> instructions = new ArrayList<>();
 
