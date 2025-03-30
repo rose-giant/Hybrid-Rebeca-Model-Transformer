@@ -15,12 +15,9 @@ import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.Instruction
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
 import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ContextConfiguration(classes = {CompilerConfig.class, ModelTransformerConfig.class})
 @SpringJUnitConfig
@@ -32,7 +29,6 @@ public class HybridRebecaToRILTest {
     RebecaModelCompiler rebecaModelCompiler;
 
     @Autowired
-    public ExceptionContainer exceptionContainer;
 
     private String HYBRID_MODEL_FILES_BASE = "src/test/resources/org/rebecalang/modeltransformer/testcase/Hybrid/";
 
@@ -45,7 +41,7 @@ public class HybridRebecaToRILTest {
         String modelName = "classicHybrid";
         File model = new File(HYBRID_MODEL_FILES_BASE + modelName + ".rebeca");
         Set<CompilerExtension> extension;
-        extension = new HashSet<CompilerExtension>();
+        extension = new HashSet<>();
         extension.add(CompilerExtension.HYBRID_REBECA);
 
         Pair<RebecaModel, SymbolTable> compilationResult =
@@ -56,7 +52,7 @@ public class HybridRebecaToRILTest {
             System.out.println(methodName);
             int counter = 0;
             for(InstructionBean instruction : transformModel.getInstructionList(methodName)) {
-                System.out.println("" + counter++ +":" + instruction);
+                System.out.println(counter++ +":" + instruction);
             }
             System.out.println("...............................................");
         }
@@ -70,7 +66,7 @@ public class HybridRebecaToRILTest {
         File model = new File(HYBRID_MODEL_FILES_BASE + modelName + ".rebeca");
         System.out.println("model is" + model);
         Set<CompilerExtension> extension;
-        extension = new HashSet<CompilerExtension>();
+        extension = new HashSet<>();
         extension.add(CompilerExtension.HYBRID_REBECA);
 
         Pair<RebecaModel, SymbolTable> compilationResult =
@@ -82,14 +78,10 @@ public class HybridRebecaToRILTest {
             System.out.println(methodName);
             int counter = 0;
             for(InstructionBean instruction : transformModel.getInstructionList(methodName)) {
-                System.out.println("" + counter++ +":" + instruction);
+                System.out.println(counter++ +":" + instruction);
             }
             System.out.println("...............................................");
         }
-
-//        String expectedInvariant = "Car.mode.Rolling.inv = t<=5";
-//        assertTrue("Expected invariant not found in RIL output!",
-//                instructions.stream().anyMatch(instr -> instr.contains(expectedInvariant)));
     }
 
     @Test
@@ -99,7 +91,7 @@ public class HybridRebecaToRILTest {
         File model = new File(HYBRID_MODEL_FILES_BASE + modelName + ".rebeca");
         System.out.println("model is" + model);
         Set<CompilerExtension> extension;
-        extension = new HashSet<CompilerExtension>();
+        extension = new HashSet<>();
         extension.add(CompilerExtension.HYBRID_REBECA);
 
         Pair<RebecaModel, SymbolTable> compilationResult =
@@ -111,7 +103,7 @@ public class HybridRebecaToRILTest {
             System.out.println(methodName);
             int counter = 0;
             for(InstructionBean instruction : transformModel.getInstructionList(methodName)) {
-                System.out.println("" + counter++ +":" + instruction);
+                System.out.println(counter++ +":" + instruction);
             }
             System.out.println("...............................................");
         }
@@ -124,7 +116,7 @@ public class HybridRebecaToRILTest {
         File model = new File(HYBRID_MODEL_FILES_BASE + modelName + ".rebeca");
         System.out.println("model is" + model);
         Set<CompilerExtension> extension;
-        extension = new HashSet<CompilerExtension>();
+        extension = new HashSet<>();
         extension.add(CompilerExtension.HYBRID_REBECA);
 
         Pair<RebecaModel, SymbolTable> compilationResult =
@@ -136,7 +128,7 @@ public class HybridRebecaToRILTest {
             System.out.println(methodName);
             int counter = 0;
             for(InstructionBean instruction : transformModel.getInstructionList(methodName)) {
-                System.out.println("" + counter++ +":" + instruction);
+                System.out.println(counter++ +":" + instruction);
             }
             System.out.println("...............................................");
         }
@@ -149,7 +141,7 @@ public class HybridRebecaToRILTest {
         File model = new File(HYBRID_MODEL_FILES_BASE + modelName + ".rebeca");
         System.out.println("model is" + model);
         Set<CompilerExtension> extension;
-        extension = new HashSet<CompilerExtension>();
+        extension = new HashSet<>();
         extension.add(CompilerExtension.HYBRID_REBECA);
 
         Pair<RebecaModel, SymbolTable> compilationResult =
@@ -161,7 +153,29 @@ public class HybridRebecaToRILTest {
             System.out.println(methodName);
             int counter = 0;
             for(InstructionBean instruction : transformModel.getInstructionList(methodName)) {
-                System.out.println("" + counter++ +":" + instruction);
+                System.out.println(counter++ +":" + instruction);
+            }
+            System.out.println("...............................................");
+        }
+    }
+
+    @Test
+    public void DelayStmtIsSuccessfullyRecognized() {
+        String modelName = "delayContainerModel";
+        File model = new File(HYBRID_MODEL_FILES_BASE + modelName + ".rebeca");
+        Set<CompilerExtension> extension;
+        extension = new HashSet<>();
+        extension.add(CompilerExtension.HYBRID_REBECA);
+
+        Pair<RebecaModel, SymbolTable> compilationResult =
+                compileModel(model, extension, CoreVersion.CORE_2_3);
+
+        RILModel transformModel = rebeca2RIL.transformModel(compilationResult, extension, CoreVersion.CORE_2_3);
+        for(String methodName : transformModel.getMethodNames()) {
+            System.out.println(methodName);
+            int counter = 0;
+            for(InstructionBean instruction : transformModel.getInstructionList(methodName)) {
+                System.out.println(counter++ +":" + instruction);
             }
             System.out.println("...............................................");
         }

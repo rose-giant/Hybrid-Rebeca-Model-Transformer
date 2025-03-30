@@ -4,26 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
 import org.rebecalang.compiler.modelcompiler.SymbolTable;
 import org.rebecalang.compiler.modelcompiler.SymbolTable.MethodInSymbolTableSpecifier;
 import org.rebecalang.compiler.modelcompiler.abstractrebeca.AbstractTypeSystem;
 import org.rebecalang.compiler.modelcompiler.SymbolTableException;
 import org.rebecalang.compiler.modelcompiler.corerebeca.CoreRebecaLabelUtility;
 import org.rebecalang.compiler.modelcompiler.corerebeca.CoreRebecaTypeSystem;
-import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.Expression;
-import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.ReactiveClassDeclaration;
-import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.TermPrimary;
-import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.Type;
+import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.*;
+import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.Label;
 import org.rebecalang.compiler.utils.CodeCompilationException;
 import org.rebecalang.modeltransformer.ril.RILUtilities;
 import org.rebecalang.modeltransformer.ril.Rebeca2RILExpressionTranslatorContainer;
-import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.MsgsrvCallInstructionBean;
-import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.DeclarationInstructionBean;
-import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.ExternalMethodCallInstructionBean;
-import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.InstructionBean;
-import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.MethodCallInstructionBean;
-import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.Variable;
+import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -63,45 +55,57 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 
 	protected boolean isBuiltInMethod(Expression expression) {
 		return isPOWMethod((TermPrimary) expression) || isSQRTMethod((TermPrimary) expression)
-				|| isAssertionMethod((TermPrimary) expression) || isGetAllActorsMethod((TermPrimary) expression);
+				|| isAssertionMethod((TermPrimary) expression) || isGetAllActorsMethod((TermPrimary) expression)
+				|| isDelayMethod((TermPrimary) expression);
 	}
+
+//	public void
 
 	public Object translate(Type baseType, Variable baseVariable, TermPrimary termPrimary,
 			ArrayList<InstructionBean> instructions) {
+
+		addDelayMethodToSymbolTable(baseType, termPrimary);
+
 		if (termPrimary.getParentSuffixPrimary() == null)
 			return (new Variable(termPrimary.getName()));
 
 		List<Expression> arguments = termPrimary.getParentSuffixPrimary().getArguments();
-		ArrayList<Object> argumentsValues = new ArrayList<Object>();
-		ArrayList<Type> argumentsType = new ArrayList<Type>();
+		ArrayList<Object> argumentsValues = new ArrayList<>();
+		ArrayList<Type> argumentsType = new ArrayList<>();
+
 		for (Expression argument : arguments) {
 			argumentsValues.add(expressionTranslatorContainer.translate(
 					argument, instructions));
 			argumentsType.add(argument.getType());
 		}
-
 		SymbolTable symbolTable = expressionTranslatorContainer.getSymbolTable();
 
-		MethodInSymbolTableSpecifier castableMethodSpecification = getMethodFromSymbolTable(baseType, termPrimary,
+		MethodInSymbolTableSpecifier castableMethodSpecification;
+
+		castableMethodSpecification = getMethodFromSymbolTable(baseType, termPrimary,
 				argumentsType, symbolTable);
 
 		String computedMethodName;
-		
 		if (castableMethodSpecification == null)
 			assert false;//return null;
-		
+
 		if (isBuiltInMethod(termPrimary))
 			computedMethodName = RILUtilities.computeMethodName(castableMethodSpecification);
 		else
 			computedMethodName = RILUtilities.computeMethodName(castableMethodSpecification.getRebecType(), castableMethodSpecification);
-		
-		Map<String, Object> passedParameters = new TreeMap<String, Object>();
+
+		Map<String, Object> passedParameters = new TreeMap<>();
 		List<String> argumentsNames = castableMethodSpecification.getArgumentsNames();
 		for(int cnt = 0; cnt < argumentsNames.size(); cnt++)
 			passedParameters.put(argumentsNames.get(cnt), argumentsValues.get(cnt));
-		
+
 		if (termPrimary.getType() == CoreRebecaTypeSystem.MSGSRV_TYPE) {
 			instructions.add(createMsgSrvCallInstructionBean(baseVariable, passedParameters, computedMethodName, termPrimary, instructions));
+			return null;
+		}
+
+		if (computedMethodName.startsWith("delay")) {
+			instructions.add(new MethodCallInstructionBean(baseVariable, termPrimary.getName(), passedParameters, null));
 			return null;
 		}
 
@@ -122,7 +126,17 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 		}
 
 		return tempVariable;
+	}
 
+	private void addDelayMethodToSymbolTable(Type baseType, TermPrimary termPrimary) {
+		Type container = baseType;
+		MethodDeclaration methodDeclaration = new MethodDeclaration();
+		methodDeclaration.setName("delay");
+		Label label = new Label();
+		label.setName(String.valueOf(CoreRebecaLabelUtility.BUILT_IN_METHOD));
+		methodDeclaration.setLineNumber(termPrimary.getLineNumber());
+		methodDeclaration.setCharacter(termPrimary.getCharacter());
+		expressionTranslatorContainer.addMethodToSymbolTable(container, methodDeclaration, label);
 	}
 
 	protected MsgsrvCallInstructionBean createMsgSrvCallInstructionBean(Variable baseVariable,
@@ -134,8 +148,21 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 	private MethodInSymbolTableSpecifier getMethodFromSymbolTable(Type baseType, TermPrimary termPrimary,
 			ArrayList<Type> argumentsType, SymbolTable symbolTable) {
 
-		MethodInSymbolTableSpecifier methodInSymbolTableSpecifier = null;
+		MethodInSymbolTableSpecifier methodInSymbolTableSpecifier;
 		Type curType = baseType;
+
+		if(termPrimary.getName().equals("delay")) {
+			List<String> argNames = new ArrayList<>();
+			argNames.add("intervalLow");
+			if (termPrimary.getParentSuffixPrimary().getArguments().size() == 2) {
+				argNames.add("intervalUp");
+			}
+
+			methodInSymbolTableSpecifier = symbolTable.new MethodInSymbolTableSpecifier(termPrimary.getName(),
+					termPrimary.getLabel(), curType, argumentsType, argNames);
+
+			return methodInSymbolTableSpecifier;
+		}
 
 		while (true) {
 			try {
@@ -163,6 +190,12 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 				}
 			}
 		}
+
+    }
+
+	private boolean isDelayMethod(TermPrimary statement) {
+		boolean returnValue = statement.getName().equals("delay");
+        return returnValue;
 	}
 
 	private boolean isAssertionMethod(TermPrimary statement) {
@@ -177,9 +210,8 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 				.canTypeCastTo(CoreRebecaTypeSystem.BOOLEAN_TYPE))
 			return false;
 		if (size == 2)
-			if (!statement.getParentSuffixPrimary().getArguments().get(1).getType()
-					.canTypeCastTo(CoreRebecaTypeSystem.STRING_TYPE))
-				return false;
+            return statement.getParentSuffixPrimary().getArguments().get(1).getType()
+                    .canTypeCastTo(CoreRebecaTypeSystem.STRING_TYPE);
 		return true;
 	}
 
@@ -188,10 +220,8 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 			return false;
 		if (statement.getParentSuffixPrimary() == null)
 			return false;
-		if (statement.getParentSuffixPrimary().getArguments().size() != 0)
-			return false;
-		return true;
-	}
+        return statement.getParentSuffixPrimary().getArguments().size() == 0;
+    }
 
 	private boolean isPOWMethod(TermPrimary statement) {
 		if (!statement.getName().equals("pow"))
@@ -203,11 +233,9 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 		if (!statement.getParentSuffixPrimary().getArguments().get(0).getType()
 				.canTypeCastTo(CoreRebecaTypeSystem.DOUBLE_TYPE))
 			return false;
-		if (!statement.getParentSuffixPrimary().getArguments().get(1).getType()
-				.canTypeCastTo(CoreRebecaTypeSystem.DOUBLE_TYPE))
-			return false;
-		return true;
-	}
+        return statement.getParentSuffixPrimary().getArguments().get(1).getType()
+                .canTypeCastTo(CoreRebecaTypeSystem.DOUBLE_TYPE);
+    }
 
 	private boolean isSQRTMethod(TermPrimary statement) {
 		if (!statement.getName().equals("sqrt"))
@@ -216,10 +244,8 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 			return false;
 		if (statement.getParentSuffixPrimary().getArguments().size() != 1)
 			return false;
-		if (!statement.getParentSuffixPrimary().getArguments().get(0).getType()
-				.canTypeCastTo(CoreRebecaTypeSystem.DOUBLE_TYPE))
-			return false;
-		return true;
-	}
+        return statement.getParentSuffixPrimary().getArguments().get(0).getType()
+                .canTypeCastTo(CoreRebecaTypeSystem.DOUBLE_TYPE);
+    }
 
 }

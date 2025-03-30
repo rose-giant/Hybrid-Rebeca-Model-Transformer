@@ -1,0 +1,29 @@
+env int NET_DELAY = 1;
+env int TEST_VAR = 0;
+
+reactiveclass Idol(5) {
+    knownrebecs {
+    }
+
+    statevars {
+    }
+
+    Idol() {
+        self.perform();
+    }
+
+    msgsrv perform() {
+        delay(2, 4.0);
+        int w = TEST_VAR;
+        int c = doNothing();
+    }
+
+    int doNothing() {
+        int a = ?(1, 2, 3);
+        return a;
+    }
+}
+
+main {
+      Idol idol():();
+}

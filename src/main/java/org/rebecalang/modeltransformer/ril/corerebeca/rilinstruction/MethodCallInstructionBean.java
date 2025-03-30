@@ -9,7 +9,7 @@ public class MethodCallInstructionBean extends AbstractCallingInstructionBean {
 	private Variable functionCallResult;
 
 	public MethodCallInstructionBean(Variable base, String methodName) {
-		this(base, methodName, new TreeMap<String, Object>(), null);
+		this(base, methodName, new TreeMap<>(), null);
 	}
 
 	public MethodCallInstructionBean(Variable base, String methodName, Map<String, Object> parameters, Variable functionCallResult) {
@@ -19,15 +19,12 @@ public class MethodCallInstructionBean extends AbstractCallingInstructionBean {
 
 	@Override
 	public String toString() {
-		String string = base + "." + methodName + "( ";
+		String string = base == null ? methodName + "( " : base + "." + methodName + "( ";
+
 		for (Entry<String, Object> entry : parameters.entrySet()) {
 			string += entry.getKey() + "->" + entry.getValue().toString() + ", ";
 		}
-		return string + ") -> " + (functionCallResult == null ? "" : " -> " + functionCallResult);
-	}
-
-	public Variable getFunctionCallResult() {
-		return functionCallResult;
+		return string + ")" + (functionCallResult == null ? "" : " -> " + functionCallResult);
 	}
 
 	public void setFunctionCallResult(Variable functionCallResult) {

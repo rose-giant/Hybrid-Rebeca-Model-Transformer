@@ -2,19 +2,14 @@ package org.rebecalang.modeltransformer.ril;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-
 import org.rebecalang.compiler.modelcompiler.SymbolTable;
-import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.Expression;
-import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.ReactiveClassDeclaration;
+import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.*;
 import org.rebecalang.compiler.modelcompiler.hybridrebeca.objectmodel.PhysicalClassDeclaration;
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.InstructionBean;
 import org.rebecalang.modeltransformer.ril.corerebeca.translator.expressiontranslator.AbstractExpressionTranslator;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
-import static java.util.Objects.isNull;
 
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Component
@@ -27,7 +22,7 @@ public class Rebeca2RILExpressionTranslatorContainer {
 	private PhysicalClassDeclaration physicalClassDeclaration;
 
 	public Rebeca2RILExpressionTranslatorContainer() {
-		translators = new Hashtable<Class<? extends Expression>, AbstractExpressionTranslator>();
+		translators = new Hashtable<>();
 	}
 
 	public Object translate(Expression expression, ArrayList<InstructionBean> instructions) {
@@ -69,13 +64,14 @@ public class Rebeca2RILExpressionTranslatorContainer {
 	public void setSymbolTable(SymbolTable symbolTable) {
 		this.symbolTable = symbolTable;
 	}
+
+	public void addMethodToSymbolTable(Type container, MethodDeclaration methodDecleration, Label label) {
+		this.symbolTable.addMethod(container, methodDecleration, label);
+	}
+
 	public SymbolTable getSymbolTable() {
 		return symbolTable;
 	}
-
-	public PhysicalClassDeclaration getPhysicalClassDeclaration() {
-        return physicalClassDeclaration;
-    }
 
     public void setPhysicalClassDeclaration(PhysicalClassDeclaration physicalClassDeclaration) {
         this.physicalClassDeclaration = physicalClassDeclaration;
