@@ -29,6 +29,7 @@ public class HybridRebecaToRILTest {
     RebecaModelCompiler rebecaModelCompiler;
 
     @Autowired
+    public ExceptionContainer exceptionContainer;
 
     private String HYBRID_MODEL_FILES_BASE = "src/test/resources/org/rebecalang/modeltransformer/testcase/Hybrid/";
 
