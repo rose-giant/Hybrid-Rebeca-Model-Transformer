@@ -10,7 +10,8 @@ physicalclass Car(1) {
     }
 
     Car() {
-        delay(?(1, 2, 3));
+        delay(1, 2);
+        //delay(?(1, 2, 3));
         //delay(1+2*3);
     }
 

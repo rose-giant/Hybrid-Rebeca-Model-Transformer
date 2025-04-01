@@ -16,11 +16,15 @@ import org.rebecalang.compiler.utils.CodeCompilationException;
 import org.rebecalang.modeltransformer.ril.RILUtilities;
 import org.rebecalang.modeltransformer.ril.Rebeca2RILExpressionTranslatorContainer;
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.*;
+import org.rebecalang.modeltransformer.ril.hybrid.rilinstruction.ContnuousNonDetInstructionBean;
+import org.rebecalang.modeltransformer.ril.hybrid.translator.expressionTranslator.ContinuousNonDetExpressionTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.stereotype.Component;
+
+import static java.util.Objects.isNull;
 
 @Component("CORE_REBECA_TERM_PRIMARY")
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -105,7 +109,10 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 		}
 
 		if (computedMethodName.startsWith("delay")) {
-			translateDelayArgs(passedParameters, instructions);
+			if (!isNull(passedParameters.get(INTERVAL_UP_KEY)) && !isNull(passedParameters.get(INTERVAL_LOW_KEY)))
+				translateContinuousDelayArgs(passedParameters, instructions);
+			else if (!isNull(passedParameters.get(INTERVAL_LOW_KEY))) translateDelayArgs(passedParameters, instructions);
+
 			instructions.add(new MethodCallInstructionBean(baseVariable, termPrimary.getName(), passedParameters, null));
 			return null;
 		}
@@ -131,6 +138,21 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 
 	public static final String INTERVAL_LOW_KEY = "intervalLow";
 	public static final String INTERVAL_UP_KEY = "intervalUp";
+
+	public void translateContinuousDelayArgs(Map<String, Object> passedParameters, ArrayList<InstructionBean> instructions) {
+		Object lowerBound = passedParameters.get(INTERVAL_LOW_KEY);
+		Object upperBound = passedParameters.get(INTERVAL_UP_KEY);
+		if (lowerBound instanceof Expression)
+			lowerBound = expressionTranslatorContainer.translate((Expression) lowerBound, instructions);
+
+		if (upperBound instanceof Expression)
+			upperBound = expressionTranslatorContainer.translate((Expression) upperBound, instructions);
+
+		Variable tempVariable = getTempVariable();
+		instructions.add(new ContnuousNonDetInstructionBean(tempVariable, lowerBound.toString(), upperBound.toString()));
+		passedParameters.put(INTERVAL_LOW_KEY, tempVariable);
+		passedParameters.remove(INTERVAL_UP_KEY);
+	}
 
 	private void translateDelayArgs(Map<String, Object> passedParameters, ArrayList<InstructionBean> instructions) {
 		Object result = new Object();
