@@ -61,64 +61,44 @@ public class BinaryExpressionTranslator extends AbstractExpressionTranslator {
 			leftType = String.valueOf(((TermPrimary) binaryExpression.getLeft()).getType().getTypeName());
 		} else if (binaryExpression.getLeft() instanceof Literal) {
 			leftType = String.valueOf(((Literal) binaryExpression.getLeft()).getType().getTypeName());
-		} else if (binaryExpression.getLeft() instanceof BinaryExpression) {
-			leftType = "double";
 		}
+//		else if (binaryExpression.getLeft() instanceof BinaryExpression) {
+//			leftType = "double";
+//		}
 
 		if (binaryExpression.getRight() instanceof TermPrimary) {
 			rightType = String.valueOf(((TermPrimary) binaryExpression.getRight()).getType().getTypeName());
 		} else if (binaryExpression.getRight() instanceof Literal) {
 			rightType = String.valueOf(((Literal) binaryExpression.getRight()).getType().getTypeName());
-		} else if (binaryExpression.getRight() instanceof BinaryExpression) {
-			rightType = "double";
 		}
+//		else if (binaryExpression.getRight() instanceof BinaryExpression) {
+//			rightType = "double";
+//		}
 
 		System.out.println("binary exp here: " + leftSide + operator + rightSide);
-			if (leftType == "float" || rightType == "float" || leftType == "double" || rightType == "double") {
-				String stringBinaryExpression = leftSide + operator + rightSide;
-				return new StartUnbreakableConditionInstructionBean(stringBinaryExpression);
+		if (leftType == "float" || rightType == "float" || leftType == "double" || rightType == "double") {
+			String stringBinaryExpression = leftSide + operator + rightSide;
+			return new StartUnbreakableConditionInstructionBean(stringBinaryExpression);
 
-			} else {
-
-				if (!operator.equals("==") && !operator.equals("!=") && operator.endsWith("=")) {
-					AssignmentInstructionBean assignmentInstruction;
-					if (operator.equals("=")) {
-						assignmentInstruction = new AssignmentInstructionBean(leftSide, rightSide, null, null);
-					} else {
-						assignmentInstruction = new AssignmentInstructionBean(leftSide,
-								leftSide, rightSide, String.valueOf(operator.charAt(0)));
-					}
-					instructions.add(assignmentInstruction);
+		} else {
+			if (!operator.equals("==") && !operator.equals("!=") && operator.endsWith("=")) {
+				AssignmentInstructionBean assignmentInstruction;
+				if (operator.equals("=")) {
+					assignmentInstruction = new AssignmentInstructionBean(leftSide, rightSide, null, null);
 				} else {
-					Variable tempVariable = getTempVariable();
-					instructions.add(new DeclarationInstructionBean(tempVariable.getVarName()));
-					AssignmentInstructionBean assignmentInstruction = new AssignmentInstructionBean(tempVariable,
-							leftSide, rightSide, operator);
-					instructions.add(assignmentInstruction);
-					return tempVariable;
+					assignmentInstruction = new AssignmentInstructionBean(leftSide,
+							leftSide, rightSide, String.valueOf(operator.charAt(0)));
 				}
+				instructions.add(assignmentInstruction);
+			} else {
+				Variable tempVariable = getTempVariable();
+				instructions.add(new DeclarationInstructionBean(tempVariable.getVarName()));
+				AssignmentInstructionBean assignmentInstruction = new AssignmentInstructionBean(tempVariable,
+						leftSide, rightSide, operator);
+				instructions.add(assignmentInstruction);
+				return tempVariable;
 			}
-//		}
-
-//		if (instructionsToBeAdded) {
-//			if (!operator.equals("==") && !operator.equals("!=") && operator.endsWith("=")) {
-//				AssignmentInstructionBean assignmentInstruction;
-//				if (operator.equals("=")) {
-//					assignmentInstruction = new AssignmentInstructionBean(leftSide, rightSide, null, null);
-//				} else {
-//					assignmentInstruction = new AssignmentInstructionBean(leftSide,
-//							leftSide, rightSide, String.valueOf(operator.charAt(0)));
-//				}
-//				instructions.add(assignmentInstruction);
-//			} else {
-//				Variable tempVariable = getTempVariable();
-//				instructions.add(new DeclarationInstructionBean(tempVariable.getVarName()));
-//				AssignmentInstructionBean assignmentInstruction = new AssignmentInstructionBean(tempVariable,
-//						leftSide, rightSide, operator);
-//				instructions.add(assignmentInstruction);
-//				return tempVariable;
-//			}
-//		}
+		}
 		return null;
 	}
 
