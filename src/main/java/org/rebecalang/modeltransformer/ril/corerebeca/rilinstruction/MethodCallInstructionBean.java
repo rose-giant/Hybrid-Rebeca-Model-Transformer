@@ -21,8 +21,11 @@ public class MethodCallInstructionBean extends AbstractCallingInstructionBean {
 	public String toString() {
 		String string = base == null ? methodName + "( " : base + "." + methodName + "( ";
 
+		int index = 0;
 		for (Entry<String, Object> entry : parameters.entrySet()) {
-			string += entry.getKey() + "->" + entry.getValue().toString() + ", ";
+			string += entry.getKey() + "->" + entry.getValue().toString();
+			string += parameters.size()-1 == index ? " " :  ", ";
+			index++;
 		}
 		return string + ")" + (functionCallResult == null ? "" : " -> " + functionCallResult);
 	}
