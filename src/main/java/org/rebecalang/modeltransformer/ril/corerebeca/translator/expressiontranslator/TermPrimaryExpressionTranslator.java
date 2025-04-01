@@ -105,7 +105,7 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 		}
 
 		if (computedMethodName.startsWith("delay")) {
-			checkDelayArgs(passedParameters);
+			Object argResult = checkDelayArgs(passedParameters, instructions);
 			instructions.add(new MethodCallInstructionBean(baseVariable, termPrimary.getName(), passedParameters, null));
 			return null;
 		}
@@ -132,17 +132,22 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 	public static final String INTERVAL_LOW_KEY = "intervalLow";
 	public static final String INTERVAL_UP_KEY = "intervalUp";
 
-	private void checkDelayArgs(Map<String, Object> passedParameters) {
-		ArrayList<InstructionBean> instructionBeans = new ArrayList<>();
-		Object result;
+	private Object checkDelayArgs(Map<String, Object> passedParameters, ArrayList<InstructionBean> instructions) {
+		Object result = new Object();
 		Object argLow = passedParameters.get(INTERVAL_LOW_KEY);
-		if (argLow instanceof NonDetValue || argLow instanceof Variable) {
-			//to be continued
+		if (argLow instanceof NonDetValue) {
+			Variable tempVariable = getTempVariable();
+			AssignmentInstructionBean assignmentInstruction = new AssignmentInstructionBean(tempVariable,
+					argLow.toString(), null, null);
+			instructions.add(assignmentInstruction);
+			result = tempVariable;
 		}
 		else if (!(argLow instanceof Literal || argLow instanceof UnaryExpression)) {
-			result = expressionTranslatorContainer.translate((Expression) argLow, instructionBeans);
+			result = expressionTranslatorContainer.translate((Expression) argLow, instructions);
 		}
 
+		passedParameters.put(INTERVAL_LOW_KEY, result);
+		return result;
 	}
 
 	private void addDelayMethodToSymbolTable(Type baseType, TermPrimary termPrimary) {
