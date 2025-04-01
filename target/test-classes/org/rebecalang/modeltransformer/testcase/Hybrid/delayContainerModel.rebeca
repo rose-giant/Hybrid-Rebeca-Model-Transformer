@@ -7,16 +7,18 @@ physicalclass Car(1) {
 
     statevars {
         int t;
+        int speed;
     }
 
     Car() {
         delay(1, 2);
-        //delay(?(1, 2, 3));
-        //delay(1+2*3);
+        speed = 20;
+
+        self.ride(t*2.0);
     }
 
-    msgsrv ride() {
-       // delay(1.2, 3.3);
+    msgsrv ride(double a) {
+       delay(10);
     }
 
     mode Rolling {

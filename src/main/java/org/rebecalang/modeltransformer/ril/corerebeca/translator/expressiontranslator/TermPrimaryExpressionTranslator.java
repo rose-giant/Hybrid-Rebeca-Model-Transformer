@@ -17,7 +17,6 @@ import org.rebecalang.modeltransformer.ril.RILUtilities;
 import org.rebecalang.modeltransformer.ril.Rebeca2RILExpressionTranslatorContainer;
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.*;
 import org.rebecalang.modeltransformer.ril.hybrid.rilinstruction.ContnuousNonDetInstructionBean;
-import org.rebecalang.modeltransformer.ril.hybrid.translator.expressionTranslator.ContinuousNonDetExpressionTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -63,12 +62,11 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 				|| isDelayMethod((TermPrimary) expression);
 	}
 
-//	public void
-
 	public Object translate(Type baseType, Variable baseVariable, TermPrimary termPrimary,
 			ArrayList<InstructionBean> instructions) {
 
 		addDelayMethodToSymbolTable(baseType, termPrimary);
+		addSetModeToSymbolTable(baseType, termPrimary);
 
 		if (termPrimary.getParentSuffixPrimary() == null)
 			return (new Variable(termPrimary.getName()));
@@ -113,6 +111,11 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 				translateContinuousDelayArgs(passedParameters, instructions);
 			else if (!isNull(passedParameters.get(INTERVAL_LOW_KEY))) translateDelayArgs(passedParameters, instructions);
 
+			instructions.add(new MethodCallInstructionBean(baseVariable, termPrimary.getName(), passedParameters, null));
+			return null;
+		}
+
+		if (computedMethodName.contains("setMode")) {
 			instructions.add(new MethodCallInstructionBean(baseVariable, termPrimary.getName(), passedParameters, null));
 			return null;
 		}
@@ -167,8 +170,11 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 		else if (argLow instanceof Variable) {
 			result = argLow;
 		}
-		else if (!(argLow instanceof Literal || argLow instanceof UnaryExpression)) {
+		else if (!(argLow instanceof Literal || argLow instanceof UnaryExpression || argLow instanceof Float ||
+				argLow instanceof Integer)) {
 			result = expressionTranslatorContainer.translate((Expression) argLow, instructions);
+		} else {
+			result = passedParameters.get(INTERVAL_LOW_KEY);
 		}
 
 		passedParameters.put(INTERVAL_LOW_KEY, result);
@@ -178,6 +184,17 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 		Type container = baseType;
 		MethodDeclaration methodDeclaration = new MethodDeclaration();
 		methodDeclaration.setName("delay");
+		Label label = new Label();
+		label.setName(String.valueOf(CoreRebecaLabelUtility.BUILT_IN_METHOD));
+		methodDeclaration.setLineNumber(termPrimary.getLineNumber());
+		methodDeclaration.setCharacter(termPrimary.getCharacter());
+		expressionTranslatorContainer.addMethodToSymbolTable(container, methodDeclaration, label);
+	}
+
+	private void addSetModeToSymbolTable(Type baseType, TermPrimary termPrimary) {
+		Type container = baseType;
+		MethodDeclaration methodDeclaration = new MethodDeclaration();
+		methodDeclaration.setName(termPrimary.getName()+".setMode");
 		Label label = new Label();
 		label.setName(String.valueOf(CoreRebecaLabelUtility.BUILT_IN_METHOD));
 		methodDeclaration.setLineNumber(termPrimary.getLineNumber());
@@ -208,6 +225,10 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 					termPrimary.getLabel(), curType, argumentsType, argNames);
 
 			return methodInSymbolTableSpecifier;
+		}
+
+		if(termPrimary.getName().equals("setMode")) {
+			System.out.println("I'm here! Happy you saw me");
 		}
 
 		while (true) {

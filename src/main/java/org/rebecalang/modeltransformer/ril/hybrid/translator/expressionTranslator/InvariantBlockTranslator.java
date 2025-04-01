@@ -42,7 +42,6 @@ public class InvariantBlockTranslator extends AbstractStatementTranslator {
                     String operator = binaryExpr.getOperator();
                     Object leftSide = expressionTranslatorContainer.translate(binaryExpr.getLeft(), instructions);
                     Object rightSide = expressionTranslatorContainer.translate(binaryExpr.getRight(), instructions);
-                    System.out.println("ode binary exp is : " + leftSide + operator + rightSide);
                 }
             }
         }

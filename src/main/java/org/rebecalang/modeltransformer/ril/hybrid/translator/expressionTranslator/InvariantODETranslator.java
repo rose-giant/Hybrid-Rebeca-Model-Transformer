@@ -31,8 +31,6 @@ public class InvariantODETranslator extends AbstractExpressionTranslator {
         Object leftSide = expressionTranslatorContainer.translate(binaryExpression.getLeft(), instructions);
         Object rightSide = expressionTranslatorContainer.translate(binaryExpression.getRight(), instructions);
 
-        System.out.println("we have our cute ode " + leftSide + operator + rightSide);
-
         String stringODEExpression = leftSide+ "'" + operator + rightSide;
         StartODEInstructionBean startODEInstructionBean = new StartODEInstructionBean(computedModeName, stringODEExpression);
         startODEInstructionBean.setOdeIndex(this.odeIndex);
