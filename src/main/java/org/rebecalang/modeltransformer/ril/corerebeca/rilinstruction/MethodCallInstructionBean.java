@@ -27,6 +27,7 @@ public class MethodCallInstructionBean extends AbstractCallingInstructionBean {
 			string += parameters.size()-1 == index ? " " :  ", ";
 			index++;
 		}
+
 		return string + ")" + (functionCallResult == null ? "" : " -> " + functionCallResult);
 	}
 
