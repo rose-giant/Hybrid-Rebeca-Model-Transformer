@@ -43,6 +43,9 @@ public class BinaryExpressionTranslator extends AbstractExpressionTranslator {
 	ArrayList<Object> operands = new ArrayList<>();
 	ArrayList<String> operators = new ArrayList<>();
 
+	String leftType = "";
+	String rightType = "";
+
 	@Override
 	public Object translate(Expression expression , ArrayList<InstructionBean> instructions) {
 		BinaryExpression binaryExpression = (BinaryExpression) expression;
@@ -55,23 +58,7 @@ public class BinaryExpressionTranslator extends AbstractExpressionTranslator {
 		Object rightSide = expressionTranslatorContainer.translate(binaryExpression.getRight(), instructions);
 		operands.add(rightSide);
 
-		String leftType = "";
-		String rightType = "";
-		if (binaryExpression.getLeft() instanceof TermPrimary) {
-			leftType = String.valueOf(binaryExpression.getLeft().getType().getTypeName());
-		} else if (binaryExpression.getLeft() instanceof Literal) {
-			leftType = String.valueOf(binaryExpression.getLeft().getType().getTypeName());
-		} else if (binaryExpression.getLeft() instanceof BinaryExpression) {
-			leftType = "double";
-		}
-
-		if (binaryExpression.getRight() instanceof TermPrimary) {
-			rightType = String.valueOf(binaryExpression.getRight().getType().getTypeName());
-		} else if (binaryExpression.getRight() instanceof Literal) {
-			rightType = String.valueOf(binaryExpression.getRight().getType().getTypeName());
-		} else if (binaryExpression.getRight() instanceof BinaryExpression) {
-			rightType = "double";
-		}
+		setOperandTypes(binaryExpression);
 
 		System.out.println("binary exp here: " + leftSide + operator + rightSide);
 		if (leftType == "float" || rightType == "float" || leftType == "double" || rightType == "double") {
@@ -101,6 +88,24 @@ public class BinaryExpressionTranslator extends AbstractExpressionTranslator {
 			}
 		}
 		return null;
+	}
+
+	private void setOperandTypes(BinaryExpression binaryExpression) {
+		if (binaryExpression.getLeft() instanceof TermPrimary) {
+			leftType = String.valueOf(binaryExpression.getLeft().getType().getTypeName());
+		} else if (binaryExpression.getLeft() instanceof Literal) {
+			leftType = String.valueOf(binaryExpression.getLeft().getType().getTypeName());
+		} else if (binaryExpression.getLeft() instanceof BinaryExpression) {
+			leftType = "double";
+		}
+
+		if (binaryExpression.getRight() instanceof TermPrimary) {
+			rightType = String.valueOf(binaryExpression.getRight().getType().getTypeName());
+		} else if (binaryExpression.getRight() instanceof Literal) {
+			rightType = String.valueOf(binaryExpression.getRight().getType().getTypeName());
+		} else if (binaryExpression.getRight() instanceof BinaryExpression) {
+			rightType = "double";
+		}
 	}
 
 }

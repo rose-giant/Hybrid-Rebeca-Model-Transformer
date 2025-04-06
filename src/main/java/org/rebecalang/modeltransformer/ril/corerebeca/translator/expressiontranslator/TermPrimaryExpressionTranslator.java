@@ -227,10 +227,6 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 			return methodInSymbolTableSpecifier;
 		}
 
-		if(termPrimary.getName().equals("setMode")) {
-			System.out.println("I'm here! Happy you saw me");
-		}
-
 		while (true) {
 			try {
 				methodInSymbolTableSpecifier = symbolTable.getCastableMethodSpecification(curType,
