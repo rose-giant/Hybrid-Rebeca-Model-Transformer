@@ -181,4 +181,48 @@ public class HybridRebecaToRILTest {
             System.out.println("...............................................");
         }
     }
+
+    @Test
+    public void GuardContainingContinuousExp() {
+        String modelName = "guardBlock";
+        File model = new File(HYBRID_MODEL_FILES_BASE + modelName + ".rebeca");
+        Set<CompilerExtension> extension;
+        extension = new HashSet<>();
+        extension.add(CompilerExtension.HYBRID_REBECA);
+
+        Pair<RebecaModel, SymbolTable> compilationResult =
+                compileModel(model, extension, CoreVersion.CORE_2_3);
+
+        RILModel transformModel = rebeca2RIL.transformModel(compilationResult, extension, CoreVersion.CORE_2_3);
+        for(String methodName : transformModel.getMethodNames()) {
+            System.out.println(methodName);
+            int counter = 0;
+            for(InstructionBean instruction : transformModel.getInstructionList(methodName)) {
+                System.out.println(counter++ +":" + instruction);
+            }
+            System.out.println("...............................................");
+        }
+    }
+
+    @Test
+    public void BinaryExpWith3Operands() {
+        String modelName = "3OperandExp";
+        File model = new File(HYBRID_MODEL_FILES_BASE + modelName + ".rebeca");
+        Set<CompilerExtension> extension;
+        extension = new HashSet<>();
+        extension.add(CompilerExtension.HYBRID_REBECA);
+
+        Pair<RebecaModel, SymbolTable> compilationResult =
+                compileModel(model, extension, CoreVersion.CORE_2_3);
+
+        RILModel transformModel = rebeca2RIL.transformModel(compilationResult, extension, CoreVersion.CORE_2_3);
+        for(String methodName : transformModel.getMethodNames()) {
+            System.out.println(methodName);
+            int counter = 0;
+            for(InstructionBean instruction : transformModel.getInstructionList(methodName)) {
+                System.out.println(counter++ +":" + instruction);
+            }
+            System.out.println("...............................................");
+        }
+    }
 }

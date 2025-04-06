@@ -2,7 +2,6 @@ package org.rebecalang.modeltransformer.ril;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-
 import org.rebecalang.compiler.modelcompiler.SymbolTable;
 import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.Expression;
 import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.ReactiveClassDeclaration;
@@ -11,7 +10,6 @@ import org.rebecalang.compiler.modelcompiler.hybridrebeca.objectmodel.PhysicalCl
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.InstructionBean;
 import org.rebecalang.modeltransformer.ril.corerebeca.translator.AbstractStatementTranslator;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -42,7 +40,7 @@ public class Rebeca2RILStatementTranslatorContainer {
 	public AbstractStatementTranslator getTranslator(Class<? extends Statement> clazz) {
 		return translators.get(clazz);
 	}
-	
+
 	public void registerTranslator(Class<? extends Statement> clazz,
 			AbstractStatementTranslator statementTranslator) {
 		translators.put(clazz, statementTranslator);

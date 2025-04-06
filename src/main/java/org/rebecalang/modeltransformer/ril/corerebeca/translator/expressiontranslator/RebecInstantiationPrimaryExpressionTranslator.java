@@ -94,6 +94,5 @@ public class RebecInstantiationPrimaryExpressionTranslator extends AbstractExpre
 		instructions.add(aiib);
 		return aiib;
 	}
-	
 
 }

@@ -58,28 +58,29 @@ public class BinaryExpressionTranslator extends AbstractExpressionTranslator {
 		String leftType = "";
 		String rightType = "";
 		if (binaryExpression.getLeft() instanceof TermPrimary) {
-			leftType = String.valueOf(((TermPrimary) binaryExpression.getLeft()).getType().getTypeName());
+			leftType = String.valueOf(binaryExpression.getLeft().getType().getTypeName());
 		} else if (binaryExpression.getLeft() instanceof Literal) {
-			leftType = String.valueOf(((Literal) binaryExpression.getLeft()).getType().getTypeName());
+			leftType = String.valueOf(binaryExpression.getLeft().getType().getTypeName());
+		} else if (binaryExpression.getLeft() instanceof BinaryExpression) {
+			leftType = "double";
 		}
-//		else if (binaryExpression.getLeft() instanceof BinaryExpression) {
-//			leftType = "double";
-//		}
 
 		if (binaryExpression.getRight() instanceof TermPrimary) {
-			rightType = String.valueOf(((TermPrimary) binaryExpression.getRight()).getType().getTypeName());
+			rightType = String.valueOf(binaryExpression.getRight().getType().getTypeName());
 		} else if (binaryExpression.getRight() instanceof Literal) {
-			rightType = String.valueOf(((Literal) binaryExpression.getRight()).getType().getTypeName());
+			rightType = String.valueOf(binaryExpression.getRight().getType().getTypeName());
+		} else if (binaryExpression.getRight() instanceof BinaryExpression) {
+			rightType = "double";
 		}
-//		else if (binaryExpression.getRight() instanceof BinaryExpression) {
-//			rightType = "double";
-//		}
 
 		System.out.println("binary exp here: " + leftSide + operator + rightSide);
 		if (leftType == "float" || rightType == "float" || leftType == "double" || rightType == "double") {
 			String stringBinaryExpression = leftSide + operator + rightSide;
-			return new StartUnbreakableConditionInstructionBean(stringBinaryExpression);
-
+			if (operator.equals("=")) {
+				instructions.add(new StartUnbreakableConditionInstructionBean(stringBinaryExpression));
+			} else {
+				return new StartUnbreakableConditionInstructionBean(stringBinaryExpression);
+			}
 		} else {
 			if (!operator.equals("==") && !operator.equals("!=") && operator.endsWith("=")) {
 				AssignmentInstructionBean assignmentInstruction;

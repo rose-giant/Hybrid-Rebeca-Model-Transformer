@@ -139,7 +139,7 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 		return tempVariable;
 	}
 
-	public static final String INTERVAL_LOW_KEY = "intervalLow";
+	public static final String INTERVAL_LOW_KEY = "bound";
 	public static final String INTERVAL_UP_KEY = "intervalUp";
 
 	public void translateContinuousDelayArgs(Map<String, Object> passedParameters, ArrayList<InstructionBean> instructions) {
