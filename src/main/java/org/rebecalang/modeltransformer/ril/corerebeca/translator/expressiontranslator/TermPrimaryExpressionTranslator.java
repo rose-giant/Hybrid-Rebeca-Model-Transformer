@@ -142,7 +142,7 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 	public static final String INTERVAL_LOW_KEY = "bound";
 	public static final String INTERVAL_UP_KEY = "intervalUp";
 
-	public void translateContinuousDelayArgs(Map<String, Object> passedParameters, ArrayList<InstructionBean> instructions) {
+	public static void translateContinuousDelayArgs(Map<String, Object> passedParameters, ArrayList<InstructionBean> instructions) {
 		Object lowerBound = passedParameters.get(INTERVAL_LOW_KEY);
 		Object upperBound = passedParameters.get(INTERVAL_UP_KEY);
 		if (lowerBound instanceof Expression)
@@ -157,8 +157,8 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 		passedParameters.remove(INTERVAL_UP_KEY);
 	}
 
-	private void translateDelayArgs(Map<String, Object> passedParameters, ArrayList<InstructionBean> instructions) {
-		Object result = new Object();
+	public static void translateDelayArgs(Map<String, Object> passedParameters, ArrayList<InstructionBean> instructions) {
+		Object result;
 		Object argLow = passedParameters.get(INTERVAL_LOW_KEY);
 		if (argLow instanceof NonDetValue) {
 			Variable tempVariable = getTempVariable();

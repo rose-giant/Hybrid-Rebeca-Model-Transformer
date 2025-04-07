@@ -27,7 +27,7 @@ physicalclass Car(1) {
         }
 
         guard(t > 6) {
-            //t = 12.1;
+            t = 12.1;
             setMode(NotRolling);
         }
     }

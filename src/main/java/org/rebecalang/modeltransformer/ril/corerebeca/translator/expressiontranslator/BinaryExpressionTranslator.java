@@ -43,8 +43,8 @@ public class BinaryExpressionTranslator extends AbstractExpressionTranslator {
 	ArrayList<Object> operands = new ArrayList<>();
 	ArrayList<String> operators = new ArrayList<>();
 
-	String leftType = "";
-	String rightType = "";
+	public String leftType = "";
+	public String rightType = "";
 
 	@Override
 	public Object translate(Expression expression , ArrayList<InstructionBean> instructions) {
@@ -60,7 +60,6 @@ public class BinaryExpressionTranslator extends AbstractExpressionTranslator {
 
 		setOperandTypes(binaryExpression);
 
-		System.out.println("binary exp here: " + leftSide + operator + rightSide);
 		if (leftType == "float" || rightType == "float" || leftType == "double" || rightType == "double") {
 			String stringBinaryExpression = leftSide + operator + rightSide;
 			if (operator.equals("=")) {
@@ -90,7 +89,7 @@ public class BinaryExpressionTranslator extends AbstractExpressionTranslator {
 		return null;
 	}
 
-	private void setOperandTypes(BinaryExpression binaryExpression) {
+	public void setOperandTypes(BinaryExpression binaryExpression) {
 		if (binaryExpression.getLeft() instanceof TermPrimary) {
 			leftType = String.valueOf(binaryExpression.getLeft().getType().getTypeName());
 		} else if (binaryExpression.getLeft() instanceof Literal) {

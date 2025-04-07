@@ -25,12 +25,15 @@ public abstract class AbstractExpressionTranslator {
 		return new Variable(TEMP_VAR_PREFIX + counter++);
 	}
 	
-	protected Rebeca2RILExpressionTranslatorContainer expressionTranslatorContainer;
+	protected static Rebeca2RILExpressionTranslatorContainer expressionTranslatorContainer;
 
 	@Autowired
 	public AbstractExpressionTranslator(Rebeca2RILExpressionTranslatorContainer expressionTranslatorContainer) {
 		this.expressionTranslatorContainer = expressionTranslatorContainer;
 	}
 
+	public static void resetCounter() {
+		counter = 0;
+	}
 	public abstract Object translate(Expression expression, ArrayList<InstructionBean> instructions);
 }
