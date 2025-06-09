@@ -2,16 +2,22 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.rebecalang</groupId>
-	<artifactId>modeltransformer</artifactId>
-	<version>1.9</version>
-
+	<groupId>com.github.rose-giant</groupId>
+	<artifactId>Hybrid-Rebeca-Model-Transformer</artifactId>
+	<version>1.0</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<compilerversion>17</compilerversion>
 		<springframework.version>6.0.16</springframework.version>
 	</properties>
+
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
 
 	<dependencies>
 		<dependency>
@@ -76,11 +82,12 @@
 			<version>${springframework.version}</version>
 			<scope>test</scope>
 		</dependency>
-        <dependency>
-            <groupId>org.rebecalang</groupId>
-            <artifactId>modeltransformer</artifactId>
-            <version>1.9</version>
-        </dependency>
+
+		<dependency>
+			<groupId>com.github.rose-giant</groupId>
+			<artifactId>Hybrid-Rebeca-Model-Transformer</artifactId>
+			<version>1.0</version>
+		</dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
