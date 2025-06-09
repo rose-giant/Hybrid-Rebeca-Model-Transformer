@@ -6,10 +6,16 @@ physicalclass Car(1) {
     }
 
     statevars {
-        @Real float t;
+        //@Real float t;
+        int t;
     }
 
     Car() {
+        int r;
+        r = t + 1;
+        if (r < 1) {
+            r = 3 * r;
+        }
     }
 
     mode Rolling {
