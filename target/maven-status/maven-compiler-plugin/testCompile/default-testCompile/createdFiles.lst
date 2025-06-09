@@ -1,3 +1,7 @@
+org\rebecalang\modeltransformer\BinaryExpressionTranslatorTest.class
+org\rebecalang\modeltransformer\HybridRebecaToRILTest.class
 org\rebecalang\modeltransformer\TimedRebecaToRealTimeMaude.class
 org\rebecalang\modeltransformer\RebecaToRILTest.class
+org\rebecalang\modeltransformer\TimedRebeca2RILTest.class
+org\rebecalang\modeltransformer\TermPrimaryExpressionTranslatorTest.class
 org\rebecalang\modeltransformer\RebecaToRILInheritanceTest.class
