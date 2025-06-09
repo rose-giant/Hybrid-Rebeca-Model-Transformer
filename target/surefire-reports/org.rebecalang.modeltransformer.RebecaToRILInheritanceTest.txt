@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: org.rebecalang.modeltransformer.RebecaToRILInheritanceTest
--------------------------------------------------------------------------------
-Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.501 s -- in org.rebecalang.modeltransformer.RebecaToRILInheritanceTest

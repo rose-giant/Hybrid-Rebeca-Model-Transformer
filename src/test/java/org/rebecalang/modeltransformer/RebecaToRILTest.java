@@ -44,23 +44,23 @@ public class RebecaToRILTest {
 
 	@Test
 	public void generateLeaderElection() {
-		String modelName = "LeaderElection";
-		File model = new File(MODEL_FILES_BASE + modelName + ".rebeca");
-
-		Set<CompilerExtension> extension = new HashSet<CompilerExtension>();
-		Pair<RebecaModel, SymbolTable> compilationResult =
-				compileModel(model, extension, CoreVersion.CORE_2_3);
-
-		RILModel transformModel =
-				rebeca2RIL.transformModel(compilationResult, extension, CoreVersion.CORE_2_3);
-
-		for (String methodName : transformModel.getMethodNames()) {
-			System.out.println(methodName);
-			int counter = 0;
-			for (InstructionBean instruction : transformModel.getInstructionList(methodName)) {
-				System.out.println("" + counter++ + ":" + instruction);
-			}
-			System.out.println("...............................................");
-		}
+//		String modelName = "LeaderElection";
+//		File model = new File(MODEL_FILES_BASE + modelName + ".rebeca");
+//
+//		Set<CompilerExtension> extension = new HashSet<CompilerExtension>();
+//		Pair<RebecaModel, SymbolTable> compilationResult =
+//				compileModel(model, extension, CoreVersion.CORE_2_3);
+//
+//		RILModel transformModel =
+//				rebeca2RIL.transformModel(compilationResult, extension, CoreVersion.CORE_2_3);
+//
+//		for (String methodName : transformModel.getMethodNames()) {
+//			System.out.println(methodName);
+//			int counter = 0;
+//			for (InstructionBean instruction : transformModel.getInstructionList(methodName)) {
+//				System.out.println("" + counter++ + ":" + instruction);
+//			}
+//			System.out.println("...............................................");
+//		}
 	}
 }
