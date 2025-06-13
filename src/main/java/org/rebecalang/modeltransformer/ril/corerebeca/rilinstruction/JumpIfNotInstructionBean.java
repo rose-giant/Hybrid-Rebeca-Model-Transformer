@@ -8,7 +8,6 @@ public class JumpIfNotInstructionBean extends InstructionBean {
 	
 	public final static int BREAK_JUMP_INDICATOR = Integer.MAX_VALUE;
 	public final static int CONTINUE_JUMP_INDICATOR = Integer.MIN_VALUE;
-	
 
 	public JumpIfNotInstructionBean(Object condition, String methodName, int lineNumber) {
 		super();

@@ -15,6 +15,21 @@ public class MsgsrvCallInstructionBean extends AbstractCallingInstructionBean {
 	}
 
 	@Override
+	public String getMethodName() {
+		return super.getMethodName();
+	}
+
+	@Override
+	public Map<String, Object> getParameters() {
+		return super.getParameters();
+	}
+
+	@Override
+	public Variable getBase() {
+		return super.getBase();
+	}
+
+	@Override
 	public String toString() {
 		String string = base + "." + methodName + "( ";
 		for (Entry<String, Object> entry : parameters.entrySet()) {

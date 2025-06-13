@@ -61,11 +61,10 @@ public class BinaryExpressionTranslator extends AbstractExpressionTranslator {
 		setOperandTypes(binaryExpression);
 
 		if (leftType == "float" || rightType == "float" || leftType == "double" || rightType == "double") {
-			String stringBinaryExpression = leftSide + operator + rightSide;
 			if (operator.equals("=")) {
-				instructions.add(new StartUnbreakableConditionInstructionBean(stringBinaryExpression));
+				instructions.add(new StartUnbreakableConditionInstructionBean(leftSide, rightSide, operator));
 			} else {
-				return new StartUnbreakableConditionInstructionBean(stringBinaryExpression);
+				return new StartUnbreakableConditionInstructionBean(leftSide, rightSide, operator);
 			}
 		} else {
 			if (!operator.equals("==") && !operator.equals("!=") && operator.endsWith("=")) {
