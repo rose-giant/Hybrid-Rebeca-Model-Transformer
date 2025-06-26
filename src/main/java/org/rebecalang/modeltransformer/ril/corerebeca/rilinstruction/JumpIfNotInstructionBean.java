@@ -27,7 +27,7 @@ public class JumpIfNotInstructionBean extends InstructionBean {
 //		if ((condition instanceof Variable)) {
 //			tempCond = (Boolean) actorState.retreiveVariableValue((Variable) condition);
 //		}
-//		if (tempCond == Boolean.FALSE) {
+//		if (0 == Boolean.FALSE) {
 //			actorState.setPC(methodName, lineNumber);
 //		} else {
 //			actorState.increasePC();

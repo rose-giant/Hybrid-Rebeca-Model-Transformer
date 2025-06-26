@@ -9,6 +9,7 @@ import org.rebecalang.modeltransformer.ril.Rebeca2RILStatementTranslatorContaine
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.InstructionBean;
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.PopARInstructionBean;
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.PushARInstructionBean;
+import org.rebecalang.modeltransformer.ril.hybrid.rilinstruction.StartSetModeInstructionBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -29,7 +30,9 @@ public class BlockStatementTranslator extends AbstractStatementTranslator {
 		BlockStatement blockStatement = (BlockStatement) statement;
 		instructions.add(new PushARInstructionBean());
 		for(Statement insideStatement : blockStatement.getStatements())
+		{
 			statementTranslatorContainer.translate(insideStatement, instructions);
+		}
 		instructions.add(new PopARInstructionBean());
 	}
 

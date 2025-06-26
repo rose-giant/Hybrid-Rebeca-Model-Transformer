@@ -17,6 +17,7 @@ import org.rebecalang.modeltransformer.ril.RILUtilities;
 import org.rebecalang.modeltransformer.ril.Rebeca2RILExpressionTranslatorContainer;
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.*;
 import org.rebecalang.modeltransformer.ril.hybrid.rilinstruction.ContnuousNonDetInstructionBean;
+import org.rebecalang.modeltransformer.ril.hybrid.rilinstruction.StartSetModeInstructionBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -93,8 +94,9 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 
 		if (isBuiltInMethod(termPrimary))
 			computedMethodName = RILUtilities.computeMethodName(castableMethodSpecification);
-		else
+		else {
 			computedMethodName = RILUtilities.computeMethodName(castableMethodSpecification.getRebecType(), castableMethodSpecification);
+		}
 
 		Map<String, Object> passedParameters = new TreeMap<>();
 		List<String> argumentsNames = castableMethodSpecification.getArgumentsNames();
@@ -116,7 +118,8 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 		}
 
 		if (computedMethodName.contains("setMode")) {
-			instructions.add(new MethodCallInstructionBean(baseVariable, termPrimary.getName(), passedParameters, null));
+			assert (!isNull(passedParameters.get(MODE_NAME)));
+			instructions.add(new StartSetModeInstructionBean( passedParameters.get(MODE_NAME).toString() ));
 			return null;
 		}
 
@@ -141,6 +144,7 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 
 	public static final String INTERVAL_LOW_KEY = "bound";
 	public static final String INTERVAL_UP_KEY = "intervalUp";
+	public static final String MODE_NAME = "modeName";
 
 	public static void translateContinuousDelayArgs(Map<String, Object> passedParameters, ArrayList<InstructionBean> instructions) {
 		Object lowerBound = passedParameters.get(INTERVAL_LOW_KEY);
@@ -194,7 +198,7 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 	private void addSetModeToSymbolTable(Type baseType, TermPrimary termPrimary) {
 		Type container = baseType;
 		MethodDeclaration methodDeclaration = new MethodDeclaration();
-		methodDeclaration.setName(termPrimary.getName()+".setMode");
+		methodDeclaration.setName("setMode");
 		Label label = new Label();
 		label.setName(String.valueOf(CoreRebecaLabelUtility.BUILT_IN_METHOD));
 		methodDeclaration.setLineNumber(termPrimary.getLineNumber());
@@ -227,6 +231,18 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 			return methodInSymbolTableSpecifier;
 		}
 
+		if(termPrimary.getName().equals("setMode")) {
+			List<String> argNames = new ArrayList<>();
+
+			argNames.add(MODE_NAME);
+
+			methodInSymbolTableSpecifier = symbolTable.new MethodInSymbolTableSpecifier(termPrimary.getName(),
+					termPrimary.getLabel(), curType, argumentsType, argNames);
+			methodInSymbolTableSpecifier.setRebecType(curType);
+
+			return methodInSymbolTableSpecifier;
+		}
+
 		while (true) {
 			try {
 				methodInSymbolTableSpecifier = symbolTable.getCastableMethodSpecification(curType,
@@ -253,7 +269,6 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 				}
 			}
 		}
-
     }
 
 	private boolean isDelayMethod(TermPrimary statement) {

@@ -225,4 +225,29 @@ public class HybridRebecaToRILTest {
             System.out.println("...............................................");
         }
     }
+
+    @Test
+    public void transformSetModeToRIL() {
+        // Model Name is replaced with the minimal Rebeca code you mentioned: main{}
+        String modelName = "setMode";  // Using the simple "main" model here
+        File model = new File(HYBRID_MODEL_FILES_BASE + modelName + ".rebeca");
+        System.out.println("model is" + model);
+        Set<CompilerExtension> extension;
+        extension = new HashSet<>();
+        extension.add(CompilerExtension.HYBRID_REBECA);
+
+        Pair<RebecaModel, SymbolTable> compilationResult =
+                compileModel(model, extension, CoreVersion.CORE_2_3);
+
+        // Transform Rebeca model to RILS
+        RILModel transformModel = rebeca2RIL.transformModel(compilationResult, extension, CoreVersion.CORE_2_3);
+        for(String methodName : transformModel.getMethodNames()) {
+            System.out.println(methodName);
+            int counter = 0;
+            for(InstructionBean instruction : transformModel.getInstructionList(methodName)) {
+                System.out.println(counter++ +":" + instruction);
+            }
+            System.out.println("...............................................");
+        }
+    }
 }

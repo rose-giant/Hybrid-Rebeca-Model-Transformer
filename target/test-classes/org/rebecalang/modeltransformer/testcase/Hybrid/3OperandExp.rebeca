@@ -1,0 +1,25 @@
+physicalclass Car(1) {
+    knownrebecs {
+    }
+
+    statevars {
+        @Real float t;
+    }
+
+    Car() {
+        t = 12 + 2.1 + 2;
+    }
+
+    mode Rolling {
+        inv(t <= 2) {
+            t' = 2;
+        }
+
+        guard(t > 6) {
+        }
+    }
+}
+
+main {
+    Car car() : ();
+}

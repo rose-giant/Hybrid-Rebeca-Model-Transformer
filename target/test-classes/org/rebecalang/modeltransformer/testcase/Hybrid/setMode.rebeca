@@ -1,0 +1,11 @@
+physicalclass Car(1) {
+
+    Car() {
+        setMode(rolling);
+    }
+
+}
+
+main {
+    Car car():();
+}

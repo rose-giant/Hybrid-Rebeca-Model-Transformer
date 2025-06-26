@@ -21,6 +21,18 @@ public class StartUnbreakableConditionInstructionBean extends InstructionBean {
         this.unbreakableCondition = stringBinaryExpression;
     }
 
+    public Object getLeftSide() {
+        return leftSide;
+    }
+
+    public Object getRightSide() {
+        return rightSide;
+    }
+
+    public String getOperator() {
+        return operator;
+    }
+
     @Override
     public String toString() {
         return this.unbreakableCondition;

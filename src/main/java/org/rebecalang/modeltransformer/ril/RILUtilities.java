@@ -25,7 +25,11 @@ public class RILUtilities {
 
 	private static String computeMethodName(String className, String methodName, List<Type> parametersTypes) {
 		String canonicalMethodName = className + "." + methodName;
-		canonicalMethodName += createListOfParameterTypes(parametersTypes);
+		if (methodName.contains("setMode")) {
+			return "setMode";
+		} else {
+			canonicalMethodName += createListOfParameterTypes(parametersTypes);
+		}
 		return canonicalMethodName;
 	}
 
