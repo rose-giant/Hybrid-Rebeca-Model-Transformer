@@ -51,6 +51,7 @@ public class BinaryExpressionTranslator extends AbstractExpressionTranslator {
 		BinaryExpression binaryExpression = (BinaryExpression) expression;
 		String operator = binaryExpression.getOperator();
 		operators.add(operator);
+		System.out.println("binaryExpression" + operator);
 
 		Object leftSide = expressionTranslatorContainer.translate(binaryExpression.getLeft(), instructions);
 		operands.add(leftSide);

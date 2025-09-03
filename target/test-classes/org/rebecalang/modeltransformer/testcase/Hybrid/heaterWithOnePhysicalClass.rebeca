@@ -52,7 +52,10 @@ reactiveclass Controller(3)
 	knownrebecs {
 		HeaterWithSensor hws;
 	}
-	statevars {}
+	statevars {
+	    int a;
+	    int b;
+	}
 
 	msgsrv initial(){
 	}

@@ -109,11 +109,11 @@ public class HybridRebecaToRILTest {
             System.out.println("...............................................");
         }
     }
-    
+
     @Test
     public void transformHeaterWithSensorRebecaToRIL() {
         // Model Name is replaced with the minimal Rebeca code you mentioned: main{}
-        String modelName = "heaterWithOnePhysicalClass";  // Using the simple "main" model here
+        String modelName = "main4";  // Using the simple "main" model here
         File model = new File(HYBRID_MODEL_FILES_BASE + modelName + ".rebeca");
         System.out.println("model is" + model);
         Set<CompilerExtension> extension;
@@ -135,10 +135,11 @@ public class HybridRebecaToRILTest {
         }
     }
 
+//    TODO: Higher orders of ODEs are not supported yet in this example
     @Test
     public void transformRebecaToRIL() {
         // Model Name is replaced with the minimal Rebeca code you mentioned: main{}
-        String modelName = "main";  // Using the simple "main" model here
+        String modelName = "example";  // Using the simple "main" model here
         File model = new File(HYBRID_MODEL_FILES_BASE + modelName + ".rebeca");
         System.out.println("model is" + model);
         Set<CompilerExtension> extension;

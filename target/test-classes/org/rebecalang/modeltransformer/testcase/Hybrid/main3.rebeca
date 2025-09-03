@@ -1,0 +1,22 @@
+
+reactiveclass Controller(1) {
+    knownrebecs {
+    }
+
+    statevars {
+        float t;
+    }
+
+    Controller() {
+        //t = 10 + 12;
+        self.test(1) after(t, 2+1.1);
+    }
+
+    msgsrv test(int a){
+        //t = 12;
+    }
+}
+
+main {
+    Controller controller():();
+}

@@ -7,9 +7,17 @@ import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.Type;
 
 public class RebecInstantiationInstructionBean extends InstructionBean {
 	private Type type;
+	private String instanceName;
 	private Map<String, Object> bindings;
 	private Map<String, Object> constructorParameters;
-	
+
+	public String getInstanceName() {
+		return instanceName;
+	}
+
+	public void setInstanceName(String instanceName) {
+		this.instanceName = instanceName;
+	}
 	public Type getType() {
 		return type;
 	}

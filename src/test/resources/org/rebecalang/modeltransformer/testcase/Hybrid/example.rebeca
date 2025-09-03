@@ -1,0 +1,34 @@
+physicalclass AutoBrake(1) {
+    statevars {
+        @Real float distance;
+        float bias = 0.1;
+    }
+
+    AutoBrake(float _d) {
+        distance = _d + bias;
+        setMode(off);
+    }
+
+    mode off {
+        inv(distance <= 2) {
+            distance' = 2;
+            distance'' = 3*distance';
+        }
+        guard(distance < 0) {
+            setMode(on);
+        }
+    }
+
+    mode on {
+        inv(distance >= 4) {
+            distance' = 1;
+        }
+        guard(t > 5) {
+            setMode(off);
+        }
+    }
+}
+
+main {
+    AutoBrake ab():(1);
+}

@@ -1,16 +1,13 @@
-env int NET_DELAY = 1;
-env int TEST_VAR = 0;
-
 physicalclass Car(1) {
     knownrebecs {
     }
 
     statevars {
-        //@Real float t;
-        int t;
+        @Real float t;
     }
 
     Car() {
+        delay(1.0, 2.0);
         int r;
         r = t + 1;
         if (r < 1) {
@@ -21,11 +18,11 @@ physicalclass Car(1) {
     mode Rolling {
         inv(t <= 2) {
             t' = 2 + 3.1;
+            t'' = 3*t';
         }
 
         guard(t == 1) {
-           // float k = 0;
-            t = 6.6 + 1;
+            t = 6.6*t + 1;
             setMode(none);
         }
     }

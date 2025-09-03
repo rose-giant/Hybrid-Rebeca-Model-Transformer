@@ -1,5 +1,7 @@
 package org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction;
 
-public abstract class InstructionBean {
+import java.io.Serializable;
+
+public abstract class InstructionBean implements Serializable {
 
 }

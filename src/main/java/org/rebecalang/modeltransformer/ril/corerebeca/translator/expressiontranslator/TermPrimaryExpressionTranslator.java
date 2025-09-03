@@ -12,11 +12,14 @@ import org.rebecalang.compiler.modelcompiler.corerebeca.CoreRebecaLabelUtility;
 import org.rebecalang.compiler.modelcompiler.corerebeca.CoreRebecaTypeSystem;
 import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.*;
 import org.rebecalang.compiler.modelcompiler.corerebeca.objectmodel.Label;
+import org.rebecalang.compiler.modelcompiler.timedrebeca.objectmodel.TimedRebecaParentSuffixPrimary;
 import org.rebecalang.compiler.utils.CodeCompilationException;
+import org.rebecalang.compiler.utils.Pair;
 import org.rebecalang.modeltransformer.ril.RILUtilities;
 import org.rebecalang.modeltransformer.ril.Rebeca2RILExpressionTranslatorContainer;
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.*;
 import org.rebecalang.modeltransformer.ril.hybrid.rilinstruction.ContnuousNonDetInstructionBean;
+import org.rebecalang.modeltransformer.ril.hybrid.rilinstruction.MsgsrvCallWithAfterInstructionBean;
 import org.rebecalang.modeltransformer.ril.hybrid.rilinstruction.StartSetModeInstructionBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -98,16 +101,29 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 			computedMethodName = RILUtilities.computeMethodName(castableMethodSpecification.getRebecType(), castableMethodSpecification);
 		}
 
-		Map<String, Object> passedParameters = new TreeMap<>();
+		TreeMap<String, Object> passedParameters = new TreeMap<>();
 		List<String> argumentsNames = castableMethodSpecification.getArgumentsNames();
 		for(int cnt = 0; cnt < argumentsNames.size(); cnt++)
 			passedParameters.put(argumentsNames.get(cnt), argumentsValues.get(cnt));
 
+		if (termPrimary.getType() == CoreRebecaTypeSystem.MSGSRV_TYPE && termPrimary.getParentSuffixPrimary() != null) {
+			TimedRebecaParentSuffixPrimary suffixPrimary = (TimedRebecaParentSuffixPrimary) termPrimary.getParentSuffixPrimary();
+			if (suffixPrimary.getStartAfterExpression() != null) {
+				ArrayList<Object> afterIntervalValues = new ArrayList<>();
+				Expression startAfter = suffixPrimary.getStartAfterExpression();
+				afterIntervalValues.add(expressionTranslatorContainer.translate(startAfter, instructions));
+				Expression endAfter = suffixPrimary.getEndAfterExpression();
+				afterIntervalValues.add(expressionTranslatorContainer.translate(endAfter, instructions));
+
+				Pair<Object, Object> afterInterval = new Pair<>(afterIntervalValues.get(0), afterIntervalValues.get(1));
+				instructions.add(new MsgsrvCallWithAfterInstructionBean(baseVariable, computedMethodName, passedParameters, afterInterval));
+				return null;
+			}
+		}
 		if (termPrimary.getType() == CoreRebecaTypeSystem.MSGSRV_TYPE) {
 			instructions.add(createMsgSrvCallInstructionBean(baseVariable, passedParameters, computedMethodName, termPrimary, instructions));
 			return null;
 		}
-
 		if (computedMethodName.startsWith("delay")) {
 			if (!isNull(passedParameters.get(INTERVAL_UP_KEY)) && !isNull(passedParameters.get(INTERVAL_LOW_KEY)))
 				translateContinuousDelayArgs(passedParameters, instructions);
@@ -192,6 +208,10 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 		label.setName(String.valueOf(CoreRebecaLabelUtility.BUILT_IN_METHOD));
 		methodDeclaration.setLineNumber(termPrimary.getLineNumber());
 		methodDeclaration.setCharacter(termPrimary.getCharacter());
+		SymbolTable symbolTable = new SymbolTable();
+		if (expressionTranslatorContainer.getSymbolTable() == null) {
+			expressionTranslatorContainer.setSymbolTable(symbolTable);
+		}
 		expressionTranslatorContainer.addMethodToSymbolTable(container, methodDeclaration, label);
 	}
 
@@ -203,6 +223,10 @@ public class TermPrimaryExpressionTranslator extends AbstractExpressionTranslato
 		label.setName(String.valueOf(CoreRebecaLabelUtility.BUILT_IN_METHOD));
 		methodDeclaration.setLineNumber(termPrimary.getLineNumber());
 		methodDeclaration.setCharacter(termPrimary.getCharacter());
+		SymbolTable symbolTable = new SymbolTable();
+		if (expressionTranslatorContainer.getSymbolTable() == null) {
+			expressionTranslatorContainer.setSymbolTable(symbolTable);
+		}
 		expressionTranslatorContainer.addMethodToSymbolTable(container, methodDeclaration, label);
 	}
 

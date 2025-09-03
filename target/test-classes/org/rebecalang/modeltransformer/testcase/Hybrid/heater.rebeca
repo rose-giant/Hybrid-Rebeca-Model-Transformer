@@ -1,0 +1,39 @@
+ reactiveclass Controller(2){
+ knownrebecs{}
+ Controller(){}
+ msgsrvcontrol(float t){
+
+ }
+ }
+
+ physicalclass HeaterWithSensor(2){
+ knownrebecs{Controller c;}
+ statevars {float temp;}
+ HeaterWithSensor(float _temp ){
+ //temp=_temp ;
+ //setmode(off);
+ }
+
+ modeoff {
+  inv(temp>18){
+  //temp' = -1;
+  }
+  guard(temp<19){
+ // c.control(temp);
+  //setmode(on);
+  }
+  }
+  modeon{
+  inv(temp<=23){
+  //temp' = 1;
+  }
+  guard(temp>=22){
+  //setmode(off);
+  }
+  }
+
+ }
+ main{
+ Controller c(a):();
+ HeaterWithSensor hws(c):(20);
+ }

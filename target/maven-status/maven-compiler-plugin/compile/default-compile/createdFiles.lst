@@ -42,9 +42,9 @@ org\rebecalang\modeltransformer\ril\hybrid\rilinstruction\EndModeInstructionBean
 org\rebecalang\modeltransformer\ros\Rebeca2ROSTypesUtilities.class
 org\rebecalang\modeltransformer\ril\corerebeca\rilinstruction\EndMsgSrvInstructionBean.class
 org\rebecalang\modeltransformer\ril\hybrid\rilinstruction\StartGuardBlockInstructionBean.class
+org\rebecalang\modeltransformer\ril\hybrid\rilinstruction\MsgsrvCallWithAfterInstructionBean.class
 org\rebecalang\modeltransformer\ros\timedrebeca\MainTransformer.class
 org\rebecalang\modeltransformer\ril\hybrid\translator\expressionTranslator\UnbreakableConditionTranslator.class
-org\rebecalang\modeltransformer\ril\hybrid\rilinstruction\SendMessageWithAfterInstructionBean.class
 org\rebecalang\modeltransformer\ril\corerebeca\translator\expressiontranslator\PlusSubExpressionTranslator.class
 org\rebecalang\modeltransformer\ril\corerebeca\rilinstruction\RebecInstantiationInstructionBean.class
 org\rebecalang\modeltransformer\ril\corerebeca\translator\AbstractStatementTranslator.class

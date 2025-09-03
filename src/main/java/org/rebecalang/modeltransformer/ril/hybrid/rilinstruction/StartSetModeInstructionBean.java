@@ -4,7 +4,11 @@ import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.Instruction
 
 public class StartSetModeInstructionBean extends InstructionBean {
 
-    String modeName;
+    private String modeName;
+    public String getModeName() {
+        return modeName;
+    }
+
     public StartSetModeInstructionBean(String modeName) {
         this.modeName = modeName;
     }

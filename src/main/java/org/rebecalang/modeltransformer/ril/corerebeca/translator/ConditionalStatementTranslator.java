@@ -8,6 +8,8 @@ import org.rebecalang.modeltransformer.ril.Rebeca2RILExpressionTranslatorContain
 import org.rebecalang.modeltransformer.ril.Rebeca2RILStatementTranslatorContainer;
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.InstructionBean;
 import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.JumpIfNotInstructionBean;
+import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.PopARInstructionBean;
+import org.rebecalang.modeltransformer.ril.corerebeca.rilinstruction.PushARInstructionBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -17,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class ConditionalStatementTranslator extends AbstractStatementTranslator {
 
-	public static final int INVALID_JUMP_LOCATION = -1;
+	public static final int INVALID_JUMP_LOCATION = 0;
 	
 	@Autowired
 	public ConditionalStatementTranslator(Rebeca2RILStatementTranslatorContainer statementTranslatorContainer,
@@ -40,6 +42,9 @@ public class ConditionalStatementTranslator extends AbstractStatementTranslator 
 			jumpToElse.setLineNumber(instructions.size());
 			statementTranslatorContainer.translate(conditionalStatement.getElseStatement(), instructions);
 			jumpToEnd.setLineNumber(instructions.size());
+		} else {
+			instructions.add(new PushARInstructionBean());
+			instructions.add(new PopARInstructionBean());
 		}
 	}
 
